@@ -1,0 +1,68 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments (kept local, never committed)
+.venv/
+venv/
+env/
+ENV/
+
+# Model Checkpoints and Weights (stored in Object Storage/HuggingFace, not Git)
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.ckpt
+*.h5
+
+# Audio Datasets and Heavy Media (stored in Cloudflare R2 / S3)
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.ogg
+data/raw/*
+!data/raw/.gitkeep
+data/speech/*
+!data/speech/.gitkeep
+
+# Environment secrets and credentials
+.env
+.env.local
+*.pem
+*.key
+token.txt
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE & OS junk
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini
+.DS_Store

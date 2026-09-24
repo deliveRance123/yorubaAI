@@ -1,0 +1,14 @@
+# Yoruba-Native AI: Core Lightweight Local Requirements
+# Specially chosen to run smoothly on low-spec hardware (4GB RAM)
+
+# Fast Unicode and Yoruba text manipulation
+regex>=2024.0.0
+
+# Environment variables & secrets management
+python-dotenv>=1.0.0
+
+# Automated testing
+pytest>=8.0.0
+
+# Custom Yoruba Tokenizer engine (Fast, compiled in Rust, lightweight)
+tokenizers>=0.19.0
