@@ -1,0 +1,71 @@
+# ==============================================================================
+# YORUBA-NATIVE AI: SEED TRAINING CORPUS (V0.1)
+# Genuine Yoruba orthography with canonical Unicode NFC tones and sub-dots.
+# ==============================================================================
+
+# --- KÍKÍ ÀTI ÌBỌ̀WỌ̀ (GREETINGS & RESPECTFUL FORMS) ---
+Ẹ kú àárọ̀ o. Ẹ káàárọ̀. Ṣé àlàáfíà lẹ jí?
+Ẹ kú ojúmọ́ rere. Ṣé dídá lara yín wà?
+Ẹ kú iṣẹ́ o. A kò ní rí àbùkù iṣẹ́.
+Ẹ kú àbọ̀ o. Káàbọ̀ sí ilé. Ẹ rọra bọ̀.
+Ẹ kú ìrọ̀lẹ́. Ẹ kúùrọ̀lẹ́ gbogbo ilé.
+Ẹ kú alẹ́ o. Ẹ káàlẹ́. Ẹ sùn dáadáa.
+Ẹ kú ewu ọdún, ẹ kú ewu ìrìnàjò. Ọlọ́run a dábò bò wá.
+Ẹ kú ìsinmi òpin ọ̀sẹ̀. Ọjọ́ a bọ̀ wá dára.
+Báwo ni nǹkan? Ṣé àlàáfíà ni? Dádáá ni mo wà.
+Kí ni orúkọ rẹ? Kí lorúkọ rẹ? Orúkọ mi ni Ayọ̀délé.
+Ibo lo ti wá? Ìlú Èkó ni mo ti wá, ṣùgbọ́n Ilé-Ifẹ̀ ni ìran mi ti bẹ̀rẹ̀.
+Kí lo ń ṣe lọ́wọ́? Mo ń kọ́ ẹ̀kọ́ nípa ìmọ̀ ẹ̀rọ àti àṣà Yorùbá.
+
+# --- ÒWE YORÙBÁ (AUTHENTIC PROVERBS & PHILOSOPHY) ---
+Òwe lẹṣin ọ̀rọ̀, bí ọ̀rọ̀ bá sọnù, òwe la fi ń wá a.
+Ọmọdé kò mọ egbò, ó ń pè é ní eṣinṣin.
+Ilé la ti ń kọ́ ẹ̀ṣọ́ ròde.
+Àgbà kì í wà lọ́jà kí orí ọmọ tuntun wọ́.
+Bí ẹ̀mí bá wà, ìrètí ń bẹ.
+Àgbájọ ọwọ́ la fi ń sọ̀yà, ọwọ́ kan kò gbẹ́rù dé orí.
+Ọwọ́ ọmọdé kò tó pẹpẹ, ti àgbàlagbà kò wọ kèrègbè.
+Ẹní ń bẹ̀rù àti ṣubú, kò ní kọ́ bí a ti ń rìn.
+Bí ojú bá ń rí, ẹnu a máa dákẹ́.
+Ìkòkò tí yóò jẹ ata, ìdí rẹ̀ yóò gbóná.
+Ọ̀rọ̀ púpọ̀ kì í kún agbọ̀n, irọ́ ní ń mú wá.
+Ẹni tó jin sí kòtò, kọ́ ará yòókù lọ́gbọ́n.
+A kì í fi iná sórí òrùlé sùn.
+Àì tètè mọ̀, olóòkùn ń kọ́ fìlà.
+Bí a bá sọkò sọ́jà, ará ilé ẹni ní ń bá.
+Àṣeṣẹ́yọ owó kò gbọdọ̀ tẹ́lẹ̀.
+Àpárò kan kò ga ju kan lọ, àfi èyí tí ó bá gún orí ebè.
+Ọ̀rọ̀ tí a sọ sínú igbó, etí ní ń gbọ́; èyí tí a sọ sínú kòtò, ojú ní ń rí i.
+Kò sí alágbára tí kì í rẹ̀, kò sí ọlọ́gbọ́n tí kì í dánu.
+Ìrọ̀lẹ́ layé, ẹni tí ó lówó lówọ́ kò gbọdọ̀ gbéraga.
+
+# --- ÌSÚNKÌ Ọ̀RỌ̀ ÀTI ÌYỌ́ FÁWẸ́LÌ (NATURAL CONVERSATIONAL ELISIONS) ---
+Kí ni o fẹ́? -> Kí lo fẹ́?
+Wá jẹ oúnjẹ. -> Wá jẹun.
+Kò sí ewu. -> Kò séwu.
+Ọmọ tí ó dára. -> Ọmọ tó dára.
+Ẹni tí ó gbọ́n. -> Ẹni tó gbọ́n.
+Ní ibi tí ó wà. -> Níbí tó wà.
+Kò sí nǹkan kan. -> Kò sí nǹkankan.
+Mo fẹ́ lọ sí oko. -> Mo fẹ́ lọ sọ́kọ.
+Bí ó bá ṣe pé. -> Bó bá ṣe pé.
+Ṣé o ti rí i? -> Ṣó o ti rí i?
+
+# --- ÀṢÀ ÀTI ÌṢE YORÙBÁ (CULTURE, HERITAGE & COSMOLOGY) ---
+Ilẹ̀ Yorùbá jẹ́ ilẹ̀ tí ó kún fún àṣà, ẹ̀sìn, ìmọ̀, àti ìṣe tí ó dára púpọ̀.
+Ilé-Ifẹ̀ ni orísun àti ìbẹ̀rẹ̀ gbogbo ọmọ Yorùbá, níbi tí Odùduwà ti gbé kalẹ̀.
+Ọba aládé ní ń darí ìlú, pẹ̀lú àwọn ìjòyè bíi Ọ̀yọ́ Mèsì ní Ilé-Ọ̀yọ́ tàbí Ọwá ní Ilẹ̀ Ìjẹ̀ṣà.
+Àwọn Yorùbá bọ̀wọ̀ fún àgbàlagbà púpọ̀; ọmọkùnrin yóò dọ̀bálẹ̀ láti kí àgbà, ọmọbìnrin yóò sì kúnlẹ̀.
+Oúnjẹ ilẹ̀ Yorùbá dára: àmàlà pẹ̀lú ewédú àti gbẹ̀gìrì (àbùlà) jẹ́ oúnjẹ àdídùn fún ará Ọ̀yọ́ àti Ìbàdàn.
+Iyán àti ọbẹ̀ ẹgúsí pẹ̀lú ẹran tútù gbajúmọ̀ ní ilẹ̀ Èkìtì àti Ìjẹ̀ṣà.
+Àkàrà àti ẹ̀kọ jẹ́ oúnjẹ àárọ̀ tí ó máa ń fún ara ní okun àti agbára láti ṣe iṣẹ́.
+Orin àti ìlù jẹ́ ọ̀nà pàtàkì tí a fi ń fi ìmọ̀ràn àti ìdùnnú hàn. Ìlù dùndún, gángan, àti bàtá máa ń sọ̀rọ̀ bí ènìyàn.
+Oríkì jẹ́ ewì ìran tí ó ń sọ ìtàn ìdílé, akọni, àti ohun rere tí àwọn baba ńlá ṣe sẹ́yìn.
+Ọmọlúwàbí jẹ́ ènìyàn tí ó ní ìwà tútù, ọ̀wọ̀, òtítọ́, ìbẹ̀rù Olódùmarè, àti ìfaradà láàárín àwùjọ.
+
+# --- Ọ̀RỌ̀ ÌMỌ̀ Ẹ̀RỌ ÀTI ỌJỌ́ IWÁJÚ (TECHNOLOGY & MODERN LIFE) ---
+Ìmọ̀ ẹ̀rọ kọ̀mpútà àti ìmọ̀ atọwọ́dá (Artificial Intelligence) ti dé sí gbogbo ayé.
+Èdè Yorùbá kò gbọdọ̀ parẹ́ nínú ìmọ̀ ẹ̀rọ ayélujára.
+A fẹ́ kí ẹ̀rọ kọ̀mpútà le gbọ́ Yorùbá, kí ó sọ Yorùbá ní ohùn tí ó dún bí ti ọmọ Yorùbá tòótọ́.
+Gbogbo àmì ohùn: àmì ókè, àmì àárín, àti àmì ìsàlẹ̀ ní láti wà ní ààyè wọn fún àgbóye pipe.
+Ìṣọ̀kan àti iṣẹ́ àṣekára ni yóò gbé èdè àti àṣà wa ga dé ibi gíga láàárín àwọn orílẹ̀-èdè àgbáyé.
