@@ -129,7 +129,17 @@ class AroyeServerHandler(BaseHTTPRequestHandler):
 
         # 6. Static files
         else:
-            filepath = os.path.join(STATIC_DIR, path.lstrip("/"))
+            clean_path = path.lstrip("/")
+            # If requested with /community/ prefix (e.g. /community/auth.css or /community/logo.png)
+            if clean_path.startswith("community/"):
+                sub_path = clean_path.replace("community/", "", 1)
+                sub_file = os.path.join(STATIC_DIR, sub_path)
+                if os.path.exists(sub_file) and not os.path.isdir(sub_file):
+                    mime, _ = mimetypes.guess_type(sub_file)
+                    self.serve_raw_file(sub_file, mime or "application/octet-stream")
+                    return
+
+            filepath = os.path.join(STATIC_DIR, clean_path)
             if os.path.exists(filepath) and not os.path.isdir(filepath):
                 mime, _ = mimetypes.guess_type(filepath)
                 self.serve_raw_file(filepath, mime or "application/octet-stream")
