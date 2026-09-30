@@ -8,7 +8,8 @@ import os
 import sys
 import json
 import mimetypes
-from http.server import HTTPServer, BaseHTTPRequestHandler
+import socket
+from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse
 
 # Ensure UTF-8 on Windows
@@ -144,6 +145,10 @@ class AroyeHTTPHandler(BaseHTTPRequestHandler):
         else:
             self.send_error(404, "Unknown API Route")
 
+    def address_string(self):
+        # Avoid reverse DNS lookup latency for lightning-fast responses
+        return self.client_address[0]
+
     def serve_file(self, filepath: str, content_type: str):
         try:
             with open(filepath, "rb") as f:
@@ -151,29 +156,32 @@ class AroyeHTTPHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", f"{content_type}; charset=utf-8" if "text" in content_type else content_type)
             self.send_header("Content-Length", str(len(content)))
+            self.send_header("Cache-Control", "public, max-age=3600")
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(content)
         except Exception as e:
             self.send_error(500, f"Error reading file: {e}")
 
     def log_message(self, format, *args):
-        # Clean logging
-        sys.stderr.write(f"[ÀRÒYÉ HTTP] {args[0]} - {args[1]}\n")
+        # Compact stdout log
+        sys.stdout.write(f"[ÀRÒYÉ] {args[0]} - {args[1]}\n")
+        sys.stdout.flush()
 
 
-def run_server(port: int = 8000):
-    server_address = ("", port)
-    httpd = HTTPServer(server_address, AroyeHTTPHandler)
+def run_server(port: int = 4000):
+    server_address = ("0.0.0.0", port)
+    httpd = ThreadingHTTPServer(server_address, AroyeHTTPHandler)
+    httpd.daemon_threads = True
     print("=" * 65)
-    print("🚀 ÀRÒYÉ — SOVEREIGN YORUBA AI WEB SERVER RUNNING")
+    print("🚀 ÀRÒYÉ — LIGHTNING FAST MULTI-THREADED SERVER RUNNING")
     print("=" * 65)
     print(f"Local URL:  http://localhost:{port}")
     print(f"Network:    http://127.0.0.1:{port}")
-    print("Press Ctrl+C to stop.")
     print("=" * 65)
     httpd.serve_forever()
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT", 4000))
     run_server(port)
