@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="yo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forúkọsílẹ̀ — ÀRÒYÉ Training Community</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <img src="logo.png" alt="ÀRÒYÉ Logo">
+      </div>
+      <h1 class="auth-title">Forúkọsílẹ̀ sí ÀRÒYÉ</h1>
+      <p class="auth-subtitle">Darapọ̀ mọ́ àwọn olùkópa láti kọ́ ẹ̀rọ AI Yorùbá àti láti máa gba àmì-ẹ̀yẹ.</p>
+    </div>
+
+    <div class="auth-alert" id="authAlert"></div>
+
+    <form class="auth-form" id="signupForm">
+      <div class="form-group">
+        <label class="form-label" for="signupName">Orúkọ Rẹ Lẹ́kùn-únrẹ́rẹ́ (Full Name)</label>
+        <input 
+          type="text" 
+          id="signupName" 
+          class="form-input" 
+          placeholder="Fún àpẹẹrẹ: Adéọlá Babátúndé" 
+          required 
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="signupEmail">Email Rẹ (Email Address)</label>
+        <input 
+          type="email" 
+          id="signupEmail" 
+          class="form-input" 
+          placeholder="adeola@email.com" 
+          required 
+          autocomplete="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="signupPassword">Ọ̀rọ̀ Ìkọ̀kọ̀ (Password)</label>
+        <input 
+          type="password" 
+          id="signupPassword" 
+          class="form-input" 
+          placeholder="Ó kéré jù lẹ́tà mẹ́fà" 
+          required 
+          minlength="6"
+          autocomplete="new-password"
+        />
+        <span class="form-hint">Ó kéré jù ọ̀rọ̀ àmì mẹ́fà (Minimum 6 characters).</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="signupDialect">Ẹ̀ka-èdè Yorùbá tí o mọ̀ dáadáa (Dialect)</label>
+        <select id="signupDialect" class="form-select">
+          <option value="general_yoruba" selected>Yorùbá Àjùmọ̀lò (General Yoruba)</option>
+          <option value="oyo">Èdè Ọ̀yọ́</option>
+          <option value="ekiti">Èdè Èkìtì</option>
+          <option value="ijebu">Èdè Ìjẹ̀bú</option>
+          <option value="ondo">Èdè Òndó</option>
+          <option value="ibadan">Èdè Ìbàdàn</option>
+        </select>
+      </div>
+
+      <button type="submit" class="auth-btn" id="signupSubmitBtn">Dá Àkọọ́lẹ̀ Sílẹ̀ (Create Account)</button>
+    </form>
+
+    <div class="auth-footer-nav">
+      <span>Ṣé o ti ní àkọọ́lẹ̀ tẹ́lẹ̀? </span>
+      <a href="/community/login" class="auth-link">Wọlé (Sign In)</a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const alertBox = document.getElementById('authAlert');
+    const submitBtn = document.getElementById('signupSubmitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alertBox.className = 'auth-alert';
+      alertBox.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Ń dá àkọọ́lẹ̀ sílẹ̀...';
+
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      const dialect = document.getElementById('signupDialect').value;
+
+      try {
+        const res = await fetch('/api/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password, dialect })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Àṣìṣe wáyé nígbà tí a ń dá àkọọ́lẹ̀ sílẹ̀.');
+        }
+
+        // Store user in session
+        localStorage.setItem('aroye_user', JSON.stringify(data.user));
+
+        alertBox.className = 'auth-alert success';
+        alertBox.textContent = '🎉 Àkọọ́lẹ̀ rẹ ti ṣetán! Ń gbé ọ lọ sí pẹpẹ iṣẹ́...';
+
+        setTimeout(() => {
+          window.location.href = '/community/dashboard';
+        }, 700);
+
+      } catch (err) {
+        alertBox.className = 'auth-alert error';
+        alertBox.textContent = err.message;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Dá Àkọọ́lẹ̀ Sílẹ̀ (Create Account)';
+      }
+    });
+  </script>
+
+</body>
+</html>

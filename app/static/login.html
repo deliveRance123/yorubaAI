@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="yo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wọlé — ÀRÒYÉ Training Community</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <img src="logo.png" alt="ÀRÒYÉ Logo">
+      </div>
+      <h1 class="auth-title">Wọlé sí ÀRÒYÉ</h1>
+      <p class="auth-subtitle">Wọlé sí àkópọ̀ rẹ láti ṣe àwọn iṣẹ́ ìkẹ́kọ̀ọ́ tàbí fọwọ́sí data.</p>
+    </div>
+
+    <div class="auth-alert" id="authAlert"></div>
+
+    <form class="auth-form" id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="loginEmail">Email Rẹ (Email Address)</label>
+        <input 
+          type="email" 
+          id="loginEmail" 
+          class="form-input" 
+          placeholder="fún àpẹẹrẹ: oruko@email.com" 
+          required 
+          autocomplete="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="loginPassword">Ọ̀rọ̀ Ìkọ̀kọ̀ (Password)</label>
+        <input 
+          type="password" 
+          id="loginPassword" 
+          class="form-input" 
+          placeholder="••••••••" 
+          required 
+          autocomplete="current-password"
+        />
+      </div>
+
+      <button type="submit" class="auth-btn" id="loginSubmitBtn">Wọlé (Sign In)</button>
+    </form>
+
+    <div class="auth-footer-nav">
+      <span>Ṣé o kò tí ì ní àkọọ́lẹ̀? </span>
+      <a href="/community/signup" class="auth-link">Forúkọsílẹ̀ (Sign Up)</a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const alertBox = document.getElementById('authAlert');
+    const submitBtn = document.getElementById('loginSubmitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alertBox.className = 'auth-alert';
+      alertBox.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Ń wọlé... (Signing in...)';
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Àṣìṣe wáyé nígbà tí a ń gbìyànjú láti wọlé.');
+        }
+
+        // Store user in local session
+        localStorage.setItem('aroye_user', JSON.stringify(data.user));
+
+        alertBox.className = 'auth-alert success';
+        alertBox.textContent = '✅ Wíwọlé yọrí sí rere! Ń darí rẹ lọ...';
+
+        // Redirect based on role
+        setTimeout(() => {
+          if (data.user.role === 'approver') {
+            window.location.href = '/community/approver';
+          } else {
+            window.location.href = '/community/dashboard';
+          }
+        }, 600);
+
+      } catch (err) {
+        alertBox.className = 'auth-alert error';
+        alertBox.textContent = err.message;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Wọlé (Sign In)';
+      }
+    });
+  </script>
+
+</body>
+</html>
