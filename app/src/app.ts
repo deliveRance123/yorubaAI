@@ -3,8 +3,6 @@
  * Unified Chat + Voice, ChatGPT-style Collapsing Sidebar, Three-Dots Menu, & History
  */
 
-import { ChatMessage, HistoryRecord, UserSettings, ApiResponse, ActiveTab } from './types';
-
 class AroyeApp {
   private activeTab: ActiveTab = 'chat';
   private messages: ChatMessage[] = [];
@@ -23,6 +21,11 @@ class AroyeApp {
   private userInput!: HTMLInputElement;
   private micBtn!: HTMLButtonElement;
   private collapseBtn!: HTMLButtonElement;
+  private expandSidebarBtn!: HTMLButtonElement;
+  private brandLogoBtn!: HTMLElement;
+  private searchToggleBtn!: HTMLButtonElement;
+  private searchCloseBtn!: HTMLButtonElement;
+  private headerSearchWrap!: HTMLElement;
   private searchInput!: HTMLInputElement;
   private moreMenuBtn!: HTMLButtonElement;
   private moreDropdown!: HTMLElement;
@@ -35,7 +38,6 @@ class AroyeApp {
     this.initSidebar();
     this.initTabs();
     this.initVoice();
-    this.initDiacritics();
     this.initChat();
     this.initHeaderMenu();
   }
@@ -50,6 +52,11 @@ class AroyeApp {
     this.userInput = document.getElementById('userInput') as HTMLInputElement;
     this.micBtn = document.getElementById('micBtn') as HTMLButtonElement;
     this.collapseBtn = document.getElementById('collapseSidebarBtn') as HTMLButtonElement;
+    this.expandSidebarBtn = document.getElementById('expandSidebarBtn') as HTMLButtonElement;
+    this.brandLogoBtn = document.getElementById('brandLogo') as HTMLElement;
+    this.searchToggleBtn = document.getElementById('searchToggleBtn') as HTMLButtonElement;
+    this.searchCloseBtn = document.getElementById('searchCloseBtn') as HTMLButtonElement;
+    this.headerSearchWrap = document.getElementById('headerSearchWrap') as HTMLElement;
     this.searchInput = document.getElementById('chatSearchInput') as HTMLInputElement;
     this.moreMenuBtn = document.getElementById('moreMenuBtn') as HTMLButtonElement;
     this.moreDropdown = document.getElementById('moreDropdown') as HTMLElement;
@@ -62,8 +69,8 @@ class AroyeApp {
     const savedCollapse = localStorage.getItem('aroye_sidebar_collapsed');
     if (savedCollapse === 'true') {
       this.isSidebarCollapsed = true;
-      this.sidebar.classList.add('collapsed');
-      this.appLayout.classList.add('sidebar-collapsed');
+      if (this.sidebar) this.sidebar.classList.add('collapsed');
+      if (this.appLayout) this.appLayout.classList.add('sidebar-collapsed');
     }
 
     // Load conversation history
@@ -82,21 +89,21 @@ class AroyeApp {
   // ==========================================================================
   private initSidebar(): void {
     if (this.collapseBtn) {
-      this.collapseBtn.addEventListener('click', () => {
+      this.collapseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         this.toggleSidebar();
       });
     }
 
-    const expandSidebarBtn = document.getElementById('expandSidebarBtn');
-    if (expandSidebarBtn) {
-      expandSidebarBtn.addEventListener('click', () => {
+    if (this.expandSidebarBtn) {
+      this.expandSidebarBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         this.toggleSidebar();
       });
     }
 
-    const brandLogo = document.getElementById('brandLogo');
-    if (brandLogo) {
-      brandLogo.addEventListener('click', () => {
+    if (this.brandLogoBtn) {
+      this.brandLogoBtn.addEventListener('click', () => {
         if (this.isSidebarCollapsed) {
           this.toggleSidebar();
         }
@@ -105,8 +112,9 @@ class AroyeApp {
 
     // Mobile drawer toggle
     const menuToggle = document.getElementById('menuToggle');
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
+    if (menuToggle && this.sidebar) {
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
         this.sidebar.classList.toggle('open');
       });
 
@@ -120,24 +128,25 @@ class AroyeApp {
   }
 
   private toggleSidebar(): void {
+    if (!this.sidebar || !this.appLayout) return;
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
     if (this.isSidebarCollapsed) {
       this.sidebar.classList.add('collapsed');
       this.appLayout.classList.add('sidebar-collapsed');
-      this.collapseBtn.setAttribute('title', 'Expand sidebar');
+      if (this.collapseBtn) this.collapseBtn.setAttribute('title', 'Expand sidebar');
     } else {
       this.sidebar.classList.remove('collapsed');
       this.appLayout.classList.remove('sidebar-collapsed');
-      this.collapseBtn.setAttribute('title', 'Collapse sidebar');
+      if (this.collapseBtn) this.collapseBtn.setAttribute('title', 'Collapse sidebar');
     }
     localStorage.setItem('aroye_sidebar_collapsed', String(this.isSidebarCollapsed));
   }
 
   // ==========================================================================
-  // 2. TAB SWITCHING (Chat, History, Settings)
+  // 2. TAB SWITCHING (Chat, History, Settings) - Desktop & Mobile
   // ==========================================================================
   private initTabs(): void {
-    const navButtons = document.querySelectorAll<HTMLButtonElement>('[data-tab]');
+    const navButtons = document.querySelectorAll<HTMLElement>('[data-tab]');
     navButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         const tab = btn.getAttribute('data-tab') as ActiveTab;
@@ -159,7 +168,7 @@ class AroyeApp {
   private switchTab(tab: ActiveTab): void {
     this.activeTab = tab;
 
-    // Update nav active classes
+    // Update active class on all nav items (desktop + mobile dock)
     document.querySelectorAll('[data-tab]').forEach((btn) => {
       if (btn.getAttribute('data-tab') === tab) {
         btn.classList.add('active');
@@ -201,32 +210,14 @@ class AroyeApp {
       this.renderHistory();
     }
 
-    // Close mobile drawer
-    if (this.sidebar.classList.contains('open')) {
+    // Close mobile drawer if open
+    if (this.sidebar && this.sidebar.classList.contains('open')) {
       this.sidebar.classList.remove('open');
     }
   }
 
   // ==========================================================================
-  // 3. QUICK YORUBA ACCENT BUTTONS
-  // ==========================================================================
-  private initDiacritics(): void {
-    const accentBtns = document.querySelectorAll<HTMLButtonElement>('.accent-btn');
-    accentBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const char = btn.getAttribute('data-char') || '';
-        const start = this.userInput.selectionStart || this.userInput.value.length;
-        const end = this.userInput.selectionEnd || this.userInput.value.length;
-        const text = this.userInput.value;
-        this.userInput.value = text.substring(0, start) + char + text.substring(end);
-        this.userInput.focus();
-        this.userInput.selectionStart = this.userInput.selectionEnd = start + char.length;
-      });
-    });
-  }
-
-  // ==========================================================================
-  // 4. VOICE INTEGRATION INSIDE CHAT (Web Speech API)
+  // 3. VOICE INTEGRATION INSIDE CHAT (Web Speech API)
   // ==========================================================================
   private initVoice(): void {
     const SpeechAPI = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -238,26 +229,28 @@ class AroyeApp {
 
       this.recognition.onstart = () => {
         this.isVoiceActive = true;
-        this.micBtn.classList.add('recording');
-        this.userInput.placeholder = 'ÀRÒYÉ ń tẹ́tí sí ọ... (Listening in Yoruba...)';
+        if (this.micBtn) this.micBtn.classList.add('recording');
+        if (this.userInput) this.userInput.placeholder = 'ÀRÒYÉ ń tẹ́tí sí ọ... (Listening in Yoruba...)';
       };
 
       this.recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
-        this.userInput.value = transcript;
-        this.userInput.focus();
+        if (this.userInput) {
+          this.userInput.value = transcript;
+          this.userInput.focus();
+        }
       };
 
       this.recognition.onend = () => {
         this.isVoiceActive = false;
-        this.micBtn.classList.remove('recording');
-        this.userInput.placeholder = 'Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀...';
+        if (this.micBtn) this.micBtn.classList.remove('recording');
+        if (this.userInput) this.userInput.placeholder = 'Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀...';
       };
 
       this.recognition.onerror = () => {
         this.isVoiceActive = false;
-        this.micBtn.classList.remove('recording');
-        this.userInput.placeholder = 'Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀...';
+        if (this.micBtn) this.micBtn.classList.remove('recording');
+        if (this.userInput) this.userInput.placeholder = 'Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀...';
       };
     }
 
@@ -291,10 +284,10 @@ class AroyeApp {
   }
 
   // ==========================================================================
-  // 5. CHAT FORM & BACKEND API INTERACTION
+  // 4. CHAT FORM & BACKEND API INTERACTION
   // ==========================================================================
   private initChat(): void {
-    if (!this.chatForm) return;
+    if (!this.chatForm || !this.userInput) return;
 
     this.chatForm.addEventListener('submit', async (e: Event) => {
       e.preventDefault();
@@ -360,6 +353,7 @@ class AroyeApp {
   }
 
   private appendMessage(msg: ChatMessage): void {
+    if (!this.messagesContainer) return;
     const bubble = document.createElement('div');
     bubble.className = `message-bubble ${msg.sender}`;
 
@@ -402,6 +396,7 @@ class AroyeApp {
 
   private showTyping(): string {
     const id = 'typing-' + Date.now();
+    if (!this.messagesContainer) return id;
     const bubble = document.createElement('div');
     bubble.id = id;
     bubble.className = 'message-bubble ai';
@@ -430,21 +425,42 @@ class AroyeApp {
   }
 
   private scrollToBottom(): void {
-    this.chatViewport.scrollTop = this.chatViewport.scrollHeight;
+    if (this.chatViewport) {
+      this.chatViewport.scrollTop = this.chatViewport.scrollHeight;
+    }
   }
 
   // ==========================================================================
-  // 6. TOP HEADER: SEARCH & THREE-DOTS MENU
+  // 5. TOP HEADER: SEARCH & THREE-DOTS MENU
   // ==========================================================================
   private initHeaderMenu(): void {
+    // Search toggle button in header
+    if (this.searchToggleBtn && this.headerSearchWrap) {
+      this.searchToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.openSearch();
+      });
+    }
+
+    if (this.searchCloseBtn && this.headerSearchWrap) {
+      this.searchCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeSearch();
+      });
+    }
+
+    // More menu dropdown toggle
     if (this.moreMenuBtn && this.moreDropdown) {
       this.moreMenuBtn.addEventListener('click', (e: MouseEvent) => {
         e.stopPropagation();
         this.moreDropdown.classList.toggle('open');
       });
 
-      document.addEventListener('click', () => {
-        this.moreDropdown.classList.remove('open');
+      document.addEventListener('click', (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (this.moreDropdown && !this.moreDropdown.contains(target) && target !== this.moreMenuBtn) {
+          this.moreDropdown.classList.remove('open');
+        }
       });
     }
 
@@ -453,11 +469,11 @@ class AroyeApp {
       item.addEventListener('click', () => {
         const action = item.getAttribute('data-action');
         this.handleMenuAction(action);
-        this.moreDropdown.classList.remove('open');
+        if (this.moreDropdown) this.moreDropdown.classList.remove('open');
       });
     });
 
-    // Chat search filtering
+    // Chat search input event
     if (this.searchInput) {
       this.searchInput.addEventListener('input', () => {
         const query = this.searchInput.value.toLowerCase().trim();
@@ -466,16 +482,39 @@ class AroyeApp {
     }
   }
 
+  private openSearch(): void {
+    if (this.headerSearchWrap) {
+      this.headerSearchWrap.classList.add('open');
+      if (this.searchInput) {
+        this.searchInput.focus();
+      }
+    }
+  }
+
+  private closeSearch(): void {
+    if (this.headerSearchWrap) {
+      this.headerSearchWrap.classList.remove('open');
+      if (this.searchInput) {
+        this.searchInput.value = '';
+        this.renderHistory();
+      }
+    }
+  }
+
   private handleMenuAction(action: string | null): void {
     switch (action) {
+      case 'search':
+        this.openSearch();
+        this.switchTab('history');
+        break;
       case 'files':
-        alert('Àwọn Fáìlì (Files): Kò tí ì sí fáìlì kankan.');
+        alert('Àwọn Fáìlì (Files): Kò tí ì sí fáìlì kankan tí a so mọ́ ìfọ̀rọ̀wérọ̀ yìí.');
         break;
       case 'pin':
-        alert('Ìfọ̀rọ̀wérọ̀ yìí ti wà ní pínnì (Pinned chat).');
+        alert('Ìfọ̀rọ̀wérọ̀ yìí ti wà ní pínnì lókè (Chat Pinned Successfully).');
         break;
       case 'archive':
-        alert('Ìfọ̀rọ̀wérọ̀ ti lọ sí àkójọpọ̀ (Archived).');
+        alert('Ìfọ̀rọ̀wérọ̀ ti lọ sí àkójọpọ̀ (Chat Archived Successfully).');
         break;
       case 'move':
         alert('Gbe lọ sí iṣẹ́-àkànṣe (Move to project).');
@@ -483,7 +522,7 @@ class AroyeApp {
       case 'delete':
         if (confirm('Ṣé o fẹ́ pa ìfọ̀rọ̀wérọ̀ yìí rẹ́?')) {
           this.messages = [];
-          this.messagesContainer.innerHTML = '';
+          if (this.messagesContainer) this.messagesContainer.innerHTML = '';
           if (this.heroWelcome) this.heroWelcome.style.display = 'flex';
         }
         break;
@@ -491,6 +530,7 @@ class AroyeApp {
   }
 
   private filterChatHistory(query: string): void {
+    this.switchTab('history');
     if (!query) {
       this.renderHistory();
       return;
@@ -502,7 +542,7 @@ class AroyeApp {
   }
 
   // ==========================================================================
-  // 7. HISTORY STORAGE & RENDERING
+  // 6. HISTORY STORAGE & RENDERING
   // ==========================================================================
   private saveHistory(prompt: string, reply: string): void {
     const record: HistoryRecord = {
@@ -514,7 +554,7 @@ class AroyeApp {
     };
 
     this.history.unshift(record);
-    if (this.history.length > 25) this.history.pop();
+    if (this.history.length > 30) this.history.pop();
     localStorage.setItem('aroye_history', JSON.stringify(this.history));
   }
 
@@ -525,8 +565,15 @@ class AroyeApp {
       this.historyList.innerHTML = `
         <div class="empty-history-box">
           <p>Kò tí ì sí àkọsílẹ̀ kankan síbẹ̀.</p>
+          <button type="button" class="start-chat-btn" id="startNewChatBtn">Bẹ̀rẹ̀ Ìfọ̀rọ̀wérọ̀ Tuntun</button>
         </div>
       `;
+      const newChatBtn = document.getElementById('startNewChatBtn');
+      if (newChatBtn) {
+        newChatBtn.addEventListener('click', () => {
+          this.switchTab('chat');
+        });
+      }
       return;
     }
 
@@ -551,7 +598,7 @@ class AroyeApp {
         const record = this.history.find((h) => h.id === id);
         if (record && record.messages && record.messages.length > 0) {
           this.messages = [...record.messages];
-          this.messagesContainer.innerHTML = '';
+          if (this.messagesContainer) this.messagesContainer.innerHTML = '';
           if (this.heroWelcome) this.heroWelcome.style.display = 'none';
           this.messages.forEach((m) => this.appendMessage(m));
           this.switchTab('chat');
@@ -569,7 +616,11 @@ class AroyeApp {
   }
 }
 
-// Instantiate on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
+// Instantiate on DOM ready or immediately if already loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    new AroyeApp();
+  });
+} else {
   new AroyeApp();
-});
+}

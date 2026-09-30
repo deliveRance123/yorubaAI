@@ -1,3 +1,4 @@
+"use strict";
 /**
  * ÀRÒYÉ — Sovereign Yoruba AI (TypeScript Frontend Architecture)
  * Unified Chat + Voice, ChatGPT-style Collapsing Sidebar, Three-Dots Menu, & History
@@ -19,6 +20,11 @@ class AroyeApp {
     userInput;
     micBtn;
     collapseBtn;
+    expandSidebarBtn;
+    brandLogoBtn;
+    searchToggleBtn;
+    searchCloseBtn;
+    headerSearchWrap;
     searchInput;
     moreMenuBtn;
     moreDropdown;
@@ -30,7 +36,6 @@ class AroyeApp {
         this.initSidebar();
         this.initTabs();
         this.initVoice();
-        this.initDiacritics();
         this.initChat();
         this.initHeaderMenu();
     }
@@ -44,6 +49,11 @@ class AroyeApp {
         this.userInput = document.getElementById('userInput');
         this.micBtn = document.getElementById('micBtn');
         this.collapseBtn = document.getElementById('collapseSidebarBtn');
+        this.expandSidebarBtn = document.getElementById('expandSidebarBtn');
+        this.brandLogoBtn = document.getElementById('brandLogo');
+        this.searchToggleBtn = document.getElementById('searchToggleBtn');
+        this.searchCloseBtn = document.getElementById('searchCloseBtn');
+        this.headerSearchWrap = document.getElementById('headerSearchWrap');
         this.searchInput = document.getElementById('chatSearchInput');
         this.moreMenuBtn = document.getElementById('moreMenuBtn');
         this.moreDropdown = document.getElementById('moreDropdown');
@@ -55,8 +65,10 @@ class AroyeApp {
         const savedCollapse = localStorage.getItem('aroye_sidebar_collapsed');
         if (savedCollapse === 'true') {
             this.isSidebarCollapsed = true;
-            this.sidebar.classList.add('collapsed');
-            this.appLayout.classList.add('sidebar-collapsed');
+            if (this.sidebar)
+                this.sidebar.classList.add('collapsed');
+            if (this.appLayout)
+                this.appLayout.classList.add('sidebar-collapsed');
         }
         // Load conversation history
         const savedHistory = localStorage.getItem('aroye_history');
@@ -74,19 +86,19 @@ class AroyeApp {
     // ==========================================================================
     initSidebar() {
         if (this.collapseBtn) {
-            this.collapseBtn.addEventListener('click', () => {
+            this.collapseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 this.toggleSidebar();
             });
         }
-        const expandSidebarBtn = document.getElementById('expandSidebarBtn');
-        if (expandSidebarBtn) {
-            expandSidebarBtn.addEventListener('click', () => {
+        if (this.expandSidebarBtn) {
+            this.expandSidebarBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 this.toggleSidebar();
             });
         }
-        const brandLogo = document.getElementById('brandLogo');
-        if (brandLogo) {
-            brandLogo.addEventListener('click', () => {
+        if (this.brandLogoBtn) {
+            this.brandLogoBtn.addEventListener('click', () => {
                 if (this.isSidebarCollapsed) {
                     this.toggleSidebar();
                 }
@@ -94,8 +106,9 @@ class AroyeApp {
         }
         // Mobile drawer toggle
         const menuToggle = document.getElementById('menuToggle');
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
+        if (menuToggle && this.sidebar) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
                 this.sidebar.classList.toggle('open');
             });
             document.addEventListener('click', (e) => {
@@ -107,21 +120,25 @@ class AroyeApp {
         }
     }
     toggleSidebar() {
+        if (!this.sidebar || !this.appLayout)
+            return;
         this.isSidebarCollapsed = !this.isSidebarCollapsed;
         if (this.isSidebarCollapsed) {
             this.sidebar.classList.add('collapsed');
             this.appLayout.classList.add('sidebar-collapsed');
-            this.collapseBtn.setAttribute('title', 'Expand sidebar');
+            if (this.collapseBtn)
+                this.collapseBtn.setAttribute('title', 'Expand sidebar');
         }
         else {
             this.sidebar.classList.remove('collapsed');
             this.appLayout.classList.remove('sidebar-collapsed');
-            this.collapseBtn.setAttribute('title', 'Collapse sidebar');
+            if (this.collapseBtn)
+                this.collapseBtn.setAttribute('title', 'Collapse sidebar');
         }
         localStorage.setItem('aroye_sidebar_collapsed', String(this.isSidebarCollapsed));
     }
     // ==========================================================================
-    // 2. TAB SWITCHING (Chat, History, Settings)
+    // 2. TAB SWITCHING (Chat, History, Settings) - Desktop & Mobile
     // ==========================================================================
     initTabs() {
         const navButtons = document.querySelectorAll('[data-tab]');
@@ -144,7 +161,7 @@ class AroyeApp {
     }
     switchTab(tab) {
         this.activeTab = tab;
-        // Update nav active classes
+        // Update active class on all nav items (desktop + mobile dock)
         document.querySelectorAll('[data-tab]').forEach((btn) => {
             if (btn.getAttribute('data-tab') === tab) {
                 btn.classList.add('active');
@@ -183,30 +200,13 @@ class AroyeApp {
         if (tab === 'history') {
             this.renderHistory();
         }
-        // Close mobile drawer
-        if (this.sidebar.classList.contains('open')) {
+        // Close mobile drawer if open
+        if (this.sidebar && this.sidebar.classList.contains('open')) {
             this.sidebar.classList.remove('open');
         }
     }
     // ==========================================================================
-    // 3. QUICK YORUBA ACCENT BUTTONS
-    // ==========================================================================
-    initDiacritics() {
-        const accentBtns = document.querySelectorAll('.accent-btn');
-        accentBtns.forEach((btn) => {
-            btn.addEventListener('click', () => {
-                const char = btn.getAttribute('data-char') || '';
-                const start = this.userInput.selectionStart || this.userInput.value.length;
-                const end = this.userInput.selectionEnd || this.userInput.value.length;
-                const text = this.userInput.value;
-                this.userInput.value = text.substring(0, start) + char + text.substring(end);
-                this.userInput.focus();
-                this.userInput.selectionStart = this.userInput.selectionEnd = start + char.length;
-            });
-        });
-    }
-    // ==========================================================================
-    // 4. VOICE INTEGRATION INSIDE CHAT (Web Speech API)
+    // 3. VOICE INTEGRATION INSIDE CHAT (Web Speech API)
     // ==========================================================================
     initVoice() {
         const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -217,23 +217,31 @@ class AroyeApp {
             this.recognition.interimResults = false;
             this.recognition.onstart = () => {
                 this.isVoiceActive = true;
-                this.micBtn.classList.add('recording');
-                this.userInput.placeholder = 'ÀRÒYÉ ń tẹ́tí sí ọ... (Listening in Yoruba...)';
+                if (this.micBtn)
+                    this.micBtn.classList.add('recording');
+                if (this.userInput)
+                    this.userInput.placeholder = 'ÀRÒYÉ ń tẹ́tí sí ọ... (Listening in Yoruba...)';
             };
             this.recognition.onresult = (event) => {
                 const transcript = event.results[0][0].transcript;
-                this.userInput.value = transcript;
-                this.userInput.focus();
+                if (this.userInput) {
+                    this.userInput.value = transcript;
+                    this.userInput.focus();
+                }
             };
             this.recognition.onend = () => {
                 this.isVoiceActive = false;
-                this.micBtn.classList.remove('recording');
-                this.userInput.placeholder = 'Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀...';
+                if (this.micBtn)
+                    this.micBtn.classList.remove('recording');
+                if (this.userInput)
+                    this.userInput.placeholder = 'Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀...';
             };
             this.recognition.onerror = () => {
                 this.isVoiceActive = false;
-                this.micBtn.classList.remove('recording');
-                this.userInput.placeholder = 'Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀...';
+                if (this.micBtn)
+                    this.micBtn.classList.remove('recording');
+                if (this.userInput)
+                    this.userInput.placeholder = 'Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀...';
             };
         }
         if (this.micBtn) {
@@ -266,10 +274,10 @@ class AroyeApp {
         }
     }
     // ==========================================================================
-    // 5. CHAT FORM & BACKEND API INTERACTION
+    // 4. CHAT FORM & BACKEND API INTERACTION
     // ==========================================================================
     initChat() {
-        if (!this.chatForm)
+        if (!this.chatForm || !this.userInput)
             return;
         this.chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -328,6 +336,8 @@ class AroyeApp {
         });
     }
     appendMessage(msg) {
+        if (!this.messagesContainer)
+            return;
         const bubble = document.createElement('div');
         bubble.className = `message-bubble ${msg.sender}`;
         if (msg.sender === 'ai') {
@@ -364,6 +374,8 @@ class AroyeApp {
     }
     showTyping() {
         const id = 'typing-' + Date.now();
+        if (!this.messagesContainer)
+            return id;
         const bubble = document.createElement('div');
         bubble.id = id;
         bubble.className = 'message-bubble ai';
@@ -388,19 +400,38 @@ class AroyeApp {
             el.remove();
     }
     scrollToBottom() {
-        this.chatViewport.scrollTop = this.chatViewport.scrollHeight;
+        if (this.chatViewport) {
+            this.chatViewport.scrollTop = this.chatViewport.scrollHeight;
+        }
     }
     // ==========================================================================
-    // 6. TOP HEADER: SEARCH & THREE-DOTS MENU
+    // 5. TOP HEADER: SEARCH & THREE-DOTS MENU
     // ==========================================================================
     initHeaderMenu() {
+        // Search toggle button in header
+        if (this.searchToggleBtn && this.headerSearchWrap) {
+            this.searchToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.openSearch();
+            });
+        }
+        if (this.searchCloseBtn && this.headerSearchWrap) {
+            this.searchCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.closeSearch();
+            });
+        }
+        // More menu dropdown toggle
         if (this.moreMenuBtn && this.moreDropdown) {
             this.moreMenuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.moreDropdown.classList.toggle('open');
             });
-            document.addEventListener('click', () => {
-                this.moreDropdown.classList.remove('open');
+            document.addEventListener('click', (e) => {
+                const target = e.target;
+                if (this.moreDropdown && !this.moreDropdown.contains(target) && target !== this.moreMenuBtn) {
+                    this.moreDropdown.classList.remove('open');
+                }
             });
         }
         // Dropdown item action clicks
@@ -408,10 +439,11 @@ class AroyeApp {
             item.addEventListener('click', () => {
                 const action = item.getAttribute('data-action');
                 this.handleMenuAction(action);
-                this.moreDropdown.classList.remove('open');
+                if (this.moreDropdown)
+                    this.moreDropdown.classList.remove('open');
             });
         });
-        // Chat search filtering
+        // Chat search input event
         if (this.searchInput) {
             this.searchInput.addEventListener('input', () => {
                 const query = this.searchInput.value.toLowerCase().trim();
@@ -419,16 +451,37 @@ class AroyeApp {
             });
         }
     }
+    openSearch() {
+        if (this.headerSearchWrap) {
+            this.headerSearchWrap.classList.add('open');
+            if (this.searchInput) {
+                this.searchInput.focus();
+            }
+        }
+    }
+    closeSearch() {
+        if (this.headerSearchWrap) {
+            this.headerSearchWrap.classList.remove('open');
+            if (this.searchInput) {
+                this.searchInput.value = '';
+                this.renderHistory();
+            }
+        }
+    }
     handleMenuAction(action) {
         switch (action) {
+            case 'search':
+                this.openSearch();
+                this.switchTab('history');
+                break;
             case 'files':
-                alert('Àwọn Fáìlì (Files): Kò tí ì sí fáìlì kankan.');
+                alert('Àwọn Fáìlì (Files): Kò tí ì sí fáìlì kankan tí a so mọ́ ìfọ̀rọ̀wérọ̀ yìí.');
                 break;
             case 'pin':
-                alert('Ìfọ̀rọ̀wérọ̀ yìí ti wà ní pínnì (Pinned chat).');
+                alert('Ìfọ̀rọ̀wérọ̀ yìí ti wà ní pínnì lókè (Chat Pinned Successfully).');
                 break;
             case 'archive':
-                alert('Ìfọ̀rọ̀wérọ̀ ti lọ sí àkójọpọ̀ (Archived).');
+                alert('Ìfọ̀rọ̀wérọ̀ ti lọ sí àkójọpọ̀ (Chat Archived Successfully).');
                 break;
             case 'move':
                 alert('Gbe lọ sí iṣẹ́-àkànṣe (Move to project).');
@@ -436,7 +489,8 @@ class AroyeApp {
             case 'delete':
                 if (confirm('Ṣé o fẹ́ pa ìfọ̀rọ̀wérọ̀ yìí rẹ́?')) {
                     this.messages = [];
-                    this.messagesContainer.innerHTML = '';
+                    if (this.messagesContainer)
+                        this.messagesContainer.innerHTML = '';
                     if (this.heroWelcome)
                         this.heroWelcome.style.display = 'flex';
                 }
@@ -444,6 +498,7 @@ class AroyeApp {
         }
     }
     filterChatHistory(query) {
+        this.switchTab('history');
         if (!query) {
             this.renderHistory();
             return;
@@ -452,7 +507,7 @@ class AroyeApp {
         this.renderHistory(filtered);
     }
     // ==========================================================================
-    // 7. HISTORY STORAGE & RENDERING
+    // 6. HISTORY STORAGE & RENDERING
     // ==========================================================================
     saveHistory(prompt, reply) {
         const record = {
@@ -463,7 +518,7 @@ class AroyeApp {
             messages: [...this.messages],
         };
         this.history.unshift(record);
-        if (this.history.length > 25)
+        if (this.history.length > 30)
             this.history.pop();
         localStorage.setItem('aroye_history', JSON.stringify(this.history));
     }
@@ -474,8 +529,15 @@ class AroyeApp {
             this.historyList.innerHTML = `
         <div class="empty-history-box">
           <p>Kò tí ì sí àkọsílẹ̀ kankan síbẹ̀.</p>
+          <button type="button" class="start-chat-btn" id="startNewChatBtn">Bẹ̀rẹ̀ Ìfọ̀rọ̀wérọ̀ Tuntun</button>
         </div>
       `;
+            const newChatBtn = document.getElementById('startNewChatBtn');
+            if (newChatBtn) {
+                newChatBtn.addEventListener('click', () => {
+                    this.switchTab('chat');
+                });
+            }
             return;
         }
         this.historyList.innerHTML = records
@@ -496,7 +558,8 @@ class AroyeApp {
                 const record = this.history.find((h) => h.id === id);
                 if (record && record.messages && record.messages.length > 0) {
                     this.messages = [...record.messages];
-                    this.messagesContainer.innerHTML = '';
+                    if (this.messagesContainer)
+                        this.messagesContainer.innerHTML = '';
                     if (this.heroWelcome)
                         this.heroWelcome.style.display = 'none';
                     this.messages.forEach((m) => this.appendMessage(m));
@@ -513,8 +576,12 @@ class AroyeApp {
             .replace(/"/g, '&quot;');
     }
 }
-// Instantiate on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
+// Instantiate on DOM ready or immediately if already loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new AroyeApp();
+    });
+}
+else {
     new AroyeApp();
-});
-export {};
+}

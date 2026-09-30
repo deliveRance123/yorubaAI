@@ -14,7 +14,7 @@
     <aside class="sidebar" id="sidebar">
       
       <div class="brand-header">
-        <div class="brand-left" id="brandLogo" title="ÀRÒYÉ">
+        <div class="brand-left" id="brandLogo" title="Toggle Sidebar">
           <div class="brand-logo">
             <img src="logo.png" alt="ÀRÒYÉ Logo" class="logo-img">
           </div>
@@ -57,15 +57,14 @@
         </button>
       </nav>
 
-      <!-- Bottom Profile / Model Status Card -->
+      <!-- Bottom Model Card (Clean: only Avatar & ÀRÒYÉ name, no version 1) -->
       <div class="sidebar-footer">
-        <div class="model-badge-card" title="ÀRÒYÉ Model (Research Preview v0.1)">
+        <div class="model-badge-card" title="ÀRÒYÉ">
           <div class="badge-avatar">
             <img src="logo.png" alt="ÀRÒYÉ">
           </div>
           <div class="badge-text">
             <strong>ÀRÒYÉ</strong>
-            <span class="version-label">Research Preview (v0.1)</span>
           </div>
         </div>
       </div>
@@ -74,7 +73,7 @@
     <!-- MAIN CONTENT VIEWPORT -->
     <main class="main-content">
       
-      <!-- Top Header with Search and Three Dots Menu -->
+      <!-- Top Header with Icons for Search & Three-Dots Menu -->
       <header class="top-header">
         <div class="header-left">
           <!-- Floating button to expand sidebar when collapsed -->
@@ -97,14 +96,23 @@
         </div>
 
         <div class="header-right">
-          <!-- Chat Search Bar -->
-          <div class="header-search-wrap">
+          <!-- Hidden/Expandable Search Bar Dropdown -->
+          <div class="header-search-wrap" id="headerSearchWrap">
             <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"/>
               <line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <input type="text" id="chatSearchInput" class="header-search-input" placeholder="Wá nínú àkọsílẹ̀... (Search history)">
+            <button type="button" class="search-close-btn" id="searchCloseBtn" title="Close search">&times;</button>
           </div>
+
+          <!-- Search Icon Button -->
+          <button class="header-icon-btn" id="searchToggleBtn" title="Search history" aria-label="Search history">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
 
           <!-- Three Dots Menu Button & Dropdown -->
           <div class="header-menu-container">
@@ -117,6 +125,13 @@
             </button>
 
             <div class="more-dropdown" id="moreDropdown">
+              <button class="menu-action-item" data-action="search">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <span>Wá nínú àkọsílẹ̀ (Search history)</span>
+              </button>
               <button class="menu-action-item" data-action="files">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -175,7 +190,7 @@
       <section class="tab-view active" id="tabChat">
         <div class="chat-viewport" id="chatViewport">
           
-          <!-- Welcome Hero (Clean centered, zero shadow, no suggested pills) -->
+          <!-- Welcome Hero (Small centered logo, zero shadow, no prompt pills) -->
           <div class="hero-welcome" id="heroWelcome">
             <div class="hero-emblem">
               <img src="logo.png" alt="ÀRÒYÉ" class="hero-logo-img">
@@ -190,27 +205,12 @@
           <div class="messages-container" id="messagesContainer"></div>
         </div>
 
-        <!-- Chat Input Footer Section -->
+        <!-- Chat Input Footer Section (Clean: No accent toolbar) -->
         <footer class="chat-input-area">
-          <!-- Quick Yoruba Accent Helper -->
-          <div class="diacritic-toolbar">
-            <span class="diacritic-label">Àmì:</span>
-            <button type="button" class="accent-btn" data-char="ẹ">ẹ</button>
-            <button type="button" class="accent-btn" data-char="ọ">ọ</button>
-            <button type="button" class="accent-btn" data-char="ṣ">ṣ</button>
-            <button type="button" class="accent-btn" data-char="á">á</button>
-            <button type="button" class="accent-btn" data-char="à">à</button>
-            <button type="button" class="accent-btn" data-char="é">é</button>
-            <button type="button" class="accent-btn" data-char="è">è</button>
-            <button type="button" class="accent-btn" data-char="ó">ó</button>
-            <button type="button" class="accent-btn" data-char="ò">ò</button>
-            <button type="button" class="accent-btn" data-char="ń">ń</button>
-          </div>
-
           <!-- Input Capsule with Voice Mic + Text Input + Send -->
           <form class="input-capsule" id="chatForm">
             <button type="button" class="mic-btn" id="micBtn" title="Speak Yoruba (Voice Input)">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
                 <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                 <line x1="12" y1="19" x2="12" y2="22"/>
@@ -227,7 +227,7 @@
             />
 
             <button type="submit" class="send-btn" id="sendBtn" title="Send">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
               </svg>
             </button>
@@ -319,7 +319,7 @@
             <div class="setting-row">
               <div class="setting-info">
                 <strong>Orúkọ Ẹ̀rọ (AI Model)</strong>
-                <span>ÀRÒYÉ v0.1 Sovereign Yoruba Transformer</span>
+                <span>ÀRÒYÉ Sovereign Yoruba Transformer</span>
               </div>
               <span class="badge-status-pill">943,744 Parameters</span>
             </div>
