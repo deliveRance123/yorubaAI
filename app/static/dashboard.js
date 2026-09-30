@@ -1,6 +1,7 @@
 /**
- * ÀRÒYÉ — Contributor Dashboard Controller
+ * ÀRÒYÉ — Modern Contributor Dashboard Controller
  * Real user authentication, real dynamic level meter, real database metrics, and task submission.
+ * Zero Emojis | Pure SVG Icons
  */
 
 // 1. Check Authentication Session
@@ -28,6 +29,25 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
   window.location.href = '/community/login';
 });
 
+// Mobile Sidebar Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const dashSidebar = document.getElementById('dashSidebar');
+const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+if (mobileMenuToggle) {
+  mobileMenuToggle.addEventListener('click', () => {
+    dashSidebar.classList.toggle('open');
+    sidebarBackdrop.classList.toggle('active');
+  });
+}
+
+if (sidebarBackdrop) {
+  sidebarBackdrop.addEventListener('click', () => {
+    dashSidebar.classList.remove('open');
+    sidebarBackdrop.classList.remove('active');
+  });
+}
+
 // 3. Audio Recorder State
 let mediaRecorder = null;
 let audioChunks = [];
@@ -43,6 +63,7 @@ const micInstruction = document.getElementById('micInstruction');
 const audioPreview = document.getElementById('audioPreview');
 const submitSpeechBtn = document.getElementById('submitSpeechBtn');
 const modalTargetSentence = document.getElementById('modalTargetSentence');
+const modalTargetEnglish = document.getElementById('modalTargetEnglish');
 
 // Phrases
 const samplePhrases = [
@@ -54,39 +75,60 @@ const samplePhrases = [
 ];
 let phraseIdx = 0;
 
-// Open Modals
-document.getElementById('openSpeechModal').addEventListener('click', () => openModal(speechModal));
-document.getElementById('openTextModal').addEventListener('click', () => openModal(textModal));
-document.getElementById('openKnowledgeModal').addEventListener('click', () => openModal(knowledgeModal));
+// Open Modals from Tasks Grid & Sidebar
+const openSpeechBtn = document.getElementById('openSpeechModal');
+const openTextBtn = document.getElementById('openTextModal');
+const openKnowledgeBtn = document.getElementById('openKnowledgeModal');
+
+const navRecordSpeech = document.getElementById('navRecordSpeech');
+const navWriteText = document.getElementById('navWriteText');
+const navCulture = document.getElementById('navCulture');
+
+if (openSpeechBtn) openSpeechBtn.addEventListener('click', () => openModal(speechModal));
+if (navRecordSpeech) navRecordSpeech.addEventListener('click', () => openModal(speechModal));
+
+if (openTextBtn) openTextBtn.addEventListener('click', () => openModal(textModal));
+if (navWriteText) navWriteText.addEventListener('click', () => openModal(textModal));
+
+if (openKnowledgeBtn) openKnowledgeBtn.addEventListener('click', () => openModal(knowledgeModal));
+if (navCulture) navCulture.addEventListener('click', () => openModal(knowledgeModal));
 
 document.querySelectorAll('[data-close]').forEach(btn => {
   btn.addEventListener('click', closeAllModals);
 });
 
 [speechModal, textModal, knowledgeModal].forEach(overlay => {
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeAllModals();
-  });
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeAllModals();
+    });
+  }
 });
 
 function openModal(modal) {
   closeAllModals();
-  modal.classList.add('open');
+  if (modal) modal.classList.add('open');
+  if (dashSidebar) dashSidebar.classList.remove('open');
+  if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
 }
 
 function closeAllModals() {
-  [speechModal, textModal, knowledgeModal].forEach(m => m.classList.remove('open'));
+  [speechModal, textModal, knowledgeModal].forEach(m => {
+    if (m) m.classList.remove('open');
+  });
   stopRecording();
 }
 
 // 4. Recording Logic
-micRecordBtn.addEventListener('click', async () => {
-  if (isRecording) {
-    stopRecording();
-  } else {
-    await startRecording();
-  }
-});
+if (micRecordBtn) {
+  micRecordBtn.addEventListener('click', async () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      await startRecording();
+    }
+  });
+}
 
 async function startRecording() {
   try {
@@ -104,13 +146,13 @@ async function startRecording() {
       audioPreview.src = url;
       audioPreview.style.display = 'block';
       submitSpeechBtn.disabled = false;
-      micInstruction.textContent = '✅ Ti parí! Ẹ gbọ́ kí ẹ sì firanṣẹ́ sí Approvers.';
+      micInstruction.textContent = 'Ohùn ti gba sílẹ̀. Gbọ́ kí o sì firanṣẹ́ sí Approvers.';
     };
 
     mediaRecorder.start();
     isRecording = true;
     micRecordBtn.classList.add('recording');
-    micInstruction.textContent = '🎙️ Ń gba ohùn sílẹ̀... Tẹ bọ́tìnì láti parí.';
+    micInstruction.textContent = 'Ń gba ohùn sílẹ̀... Tẹ bọ́tìnì náà lẹ́ẹ̀kan sí i láti parí.';
     audioPreview.style.display = 'none';
     submitSpeechBtn.disabled = true;
   } catch (err) {
@@ -128,85 +170,106 @@ function stopRecording() {
 }
 
 // Submit Speech
-submitSpeechBtn.addEventListener('click', async () => {
-  if (!recordedBlob) return;
-  submitSpeechBtn.disabled = true;
-  submitSpeechBtn.textContent = 'Ń gbé e lọ...';
+if (submitSpeechBtn) {
+  submitSpeechBtn.addEventListener('click', async () => {
+    if (!recordedBlob) return;
+    submitSpeechBtn.disabled = true;
+    submitSpeechBtn.textContent = 'Ń gbé e lọ...';
 
-  const formData = new FormData();
-  formData.append('audio', recordedBlob, 'yoruba_rec.wav');
-  formData.append('sentence', modalTargetSentence.textContent.trim());
-  formData.append('user_id', currentUser.id);
+    const formData = new FormData();
+    formData.append('audio', recordedBlob, 'yoruba_rec.wav');
+    formData.append('sentence', modalTargetSentence.textContent.trim());
+    formData.append('user_id', currentUser.id);
 
-  try {
-    const res = await fetch('/api/community/submit-speech', {
-      method: 'POST',
-      body: formData
-    });
-    if (res.ok) {
-      alert('🎉 Ẹ ṣeun! A ti fi ohùn rẹ ránṣẹ́ sí ibi-àyẹ̀wò (Sent to Approver review).');
-      closeAllModals();
-      loadUserDashboard();
-      phraseIdx = (phraseIdx + 1) % samplePhrases.length;
-      modalTargetSentence.textContent = `"${samplePhrases[phraseIdx].yoruba}"`;
-      document.getElementById('modalTargetEnglish').textContent = samplePhrases[phraseIdx].english;
+    try {
+      const res = await fetch('/api/community/submit-speech', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (res.ok) {
+        alert('A ti fi ohùn rẹ ránṣẹ́ sí Approvers! Wọ́n yóò yẹ̀ ẹ́ wò kí ó tó wọ inú AI Brain.');
+        closeAllModals();
+        phraseIdx = (phraseIdx + 1) % samplePhrases.length;
+        modalTargetSentence.textContent = `"${samplePhrases[phraseIdx].yoruba}"`;
+        modalTargetEnglish.textContent = samplePhrases[phraseIdx].english;
+        loadUserDashboard();
+      } else {
+        alert('Àṣìṣe wáyé nígbà tí a ń fi ohùn ránṣẹ́.');
+      }
+    } catch {
+      alert('Àṣìṣe network wáyé.');
+    } finally {
+      submitSpeechBtn.disabled = false;
+      submitSpeechBtn.textContent = 'Firanṣẹ́ sí Approvers (+50 pts)';
+      recordedBlob = null;
     }
-  } catch {
-    alert('Àṣìṣe wáyé nígbà tí a ń firanṣẹ́.');
-  } finally {
-    submitSpeechBtn.disabled = false;
-    submitSpeechBtn.textContent = 'Firanṣẹ́ sí Approvers (+50 pts)';
-  }
-});
+  });
+}
 
 // Submit Text Form
-document.getElementById('submitTextForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const sentence = document.getElementById('textYorubaInput').value.trim();
-  const english = document.getElementById('textEnglishInput').value.trim();
-  if (!sentence) return;
+const submitTextForm = document.getElementById('submitTextForm');
+if (submitTextForm) {
+  submitTextForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const yoruba_text = document.getElementById('yorubaTextInput').value.trim();
+    const english_translation = document.getElementById('englishTranslationInput').value.trim();
 
-  try {
-    const res = await fetch('/api/community/submit-text', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sentence, english, user_id: currentUser.id })
-    });
-    if (res.ok) {
-      alert('📄 Ẹ ṣeun! A ti fi gbolohun rẹ ránṣẹ́ sí Approvers.');
-      document.getElementById('submitTextForm').reset();
-      closeAllModals();
-      loadUserDashboard();
+    try {
+      const res = await fetch('/api/community/submit-text', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: currentUser.id,
+          yoruba_text,
+          english_translation
+        })
+      });
+
+      if (res.ok) {
+        alert('A ti fi gbolohun rẹ ránṣẹ́ sí ibi-àtúnyẹ̀wò Approvers!');
+        submitTextForm.reset();
+        closeAllModals();
+        loadUserDashboard();
+      }
+    } catch {
+      alert('Àṣìṣe wáyé.');
     }
-  } catch {
-    alert('Àṣìṣe wáyé.');
-  }
-});
+  });
+}
 
-// Submit Knowledge Form
-document.getElementById('submitKnowledgeForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const title = document.getElementById('knowTitleInput').value.trim();
-  const meaning = document.getElementById('knowMeaningInput').value.trim();
-  const dialect = document.getElementById('knowDialectSelect').value;
-  if (!title || !meaning) return;
+// Submit Cultural Knowledge Form
+const submitKnowledgeForm = document.getElementById('submitKnowledgeForm');
+if (submitKnowledgeForm) {
+  submitKnowledgeForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const proverb = document.getElementById('proverbInput').value.trim();
+    const meaning = document.getElementById('meaningInput').value.trim();
+    const category = document.getElementById('categorySelect').value;
 
-  try {
-    const res = await fetch('/api/community/submit-knowledge', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, meaning, dialect, user_id: currentUser.id })
-    });
-    if (res.ok) {
-      alert('📖 Ẹ ṣeun! A ti fi ìmọ̀ àṣà rẹ ránṣẹ́ sí Approvers.');
-      document.getElementById('submitKnowledgeForm').reset();
-      closeAllModals();
-      loadUserDashboard();
+    try {
+      const res = await fetch('/api/community/submit-knowledge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: currentUser.id,
+          proverb,
+          meaning,
+          category
+        })
+      });
+
+      if (res.ok) {
+        alert('Ẹ ṣeun! A ti fi ìmọ̀ àṣà rẹ ránṣẹ́ sí Approvers.');
+        submitKnowledgeForm.reset();
+        closeAllModals();
+        loadUserDashboard();
+      }
+    } catch {
+      alert('Àṣìṣe wáyé.');
     }
-  } catch {
-    alert('Àṣìṣe wáyé.');
-  }
-});
+  });
+}
 
 // 5. Load Real User Metrics & Dynamic Level Reading (NO FAKE NUMBERS!)
 async function loadUserDashboard() {
@@ -229,26 +292,22 @@ async function loadUserDashboard() {
       document.getElementById('myPendingCount').textContent = data.pending_count || 0;
 
       // Real Dynamic Level Calculation
-      let level = 1;
       let levelName = 'Level 1 Contributor';
       let levelSub = 'Beginner Contributor';
       let nextThreshold = 100;
       let percentage = 0;
 
       if (points < 100) {
-        level = 1;
         levelName = 'Level 1 Contributor';
         levelSub = 'Beginner Yoruba Contributor';
         nextThreshold = 100;
         percentage = Math.round((points / 100) * 100);
       } else if (points < 300) {
-        level = 2;
         levelName = 'Level 2 Contributor';
         levelSub = 'Dedicated Yoruba Scholar';
         nextThreshold = 300;
         percentage = Math.round(((points - 100) / 200) * 100);
       } else {
-        level = 3;
         levelName = 'Level 3 Contributor';
         levelSub = 'Master Yoruba Linguist';
         nextThreshold = 600;
@@ -262,7 +321,7 @@ async function loadUserDashboard() {
       
       // Update radial gradient dynamically
       document.getElementById('radialMeter').style.background = 
-        `conic-gradient(var(--primary-orange) 0% ${percentage}%, #E5E7EB ${percentage}% 100%)`;
+        `conic-gradient(var(--primary-orange) 0% ${percentage}%, #E2E8F0 ${percentage}% 100%)`;
 
       // Render Submissions Table
       renderSubmissionsTable(data.submissions || []);
@@ -277,7 +336,7 @@ function renderSubmissionsTable(list) {
   if (!list || list.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="5" style="text-align: center; color: var(--text-subtle); padding: 30px;">
+        <td colspan="5" style="text-align: center; color: var(--text-subtle); padding: 36px 20px;">
           Kò tí ì sí iṣẹ́ tí o ti firanṣẹ́. Yan iṣẹ́ kan lókè láti bẹ̀rẹ̀!
         </td>
       </tr>
@@ -287,13 +346,17 @@ function renderSubmissionsTable(list) {
 
   tbody.innerHTML = list.map(item => {
     let badgeClass = 'pending';
-    let statusText = '⏳ Ní Ìdúró (Pending)';
+    let statusText = 'Pending Review';
+    let statusIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+
     if (item.status === 'approved') {
       badgeClass = 'approved';
-      statusText = '✅ Tí a Fọwọ́sí (Approved)';
+      statusText = 'Approved';
+      statusIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
     } else if (item.status === 'rejected') {
       badgeClass = 'rejected';
-      statusText = '❌ Tí a Kọ̀ (Rejected)';
+      statusText = 'Rejected';
+      statusIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
     }
 
     return `
@@ -301,7 +364,12 @@ function renderSubmissionsTable(list) {
         <td><strong>${escapeHtml(item.type)}</strong></td>
         <td>${escapeHtml(item.content)}</td>
         <td>${escapeHtml(item.date)}</td>
-        <td><span class="status-badge ${badgeClass}">${statusText}</span></td>
+        <td>
+          <span class="status-badge ${badgeClass}">
+            ${statusIcon}
+            <span>${statusText}</span>
+          </span>
+        </td>
         <td><strong>${item.points ? '+' + item.points + ' pts' : 'Pending'}</strong></td>
       </tr>
     `;

@@ -9,27 +9,76 @@
 </head>
 <body>
 
-  <!-- FIXED TOP HEADER -->
-  <header class="dash-fixed-header approver-theme">
-    <div class="dash-header-container">
-      <div class="dash-header-left">
-        <a href="/community" class="dash-brand">
-          <img src="/logo.png" alt="ÀRÒYÉ" width="34" height="34">
-          <span class="dash-brand-name">ÀRÒYÉ</span>
-          <span class="dash-role-badge approver">🛡️ Lead Approver</span>
-        </a>
+  <!-- MOBILE SIDEBAR BACKDROP -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="dash-app-layout">
+
+    <!-- ==================================================================== -->
+    <!-- 1. APPROVER SIDEBAR -->
+    <!-- ==================================================================== -->
+    <aside class="dash-sidebar approver-theme" id="dashSidebar">
+      <div class="sidebar-top">
+        
+        <!-- Brand -->
+        <div class="sidebar-brand-wrap">
+          <a href="/community" class="sidebar-brand">
+            <img src="/logo.png" alt="ÀRÒYÉ">
+            <span class="sidebar-brand-text">ÀRÒYÉ</span>
+          </a>
+          <span class="sidebar-role-badge approver">Approver</span>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="sidebar-nav-section">
+          <span class="sidebar-section-label">ÀYẸ̀WÒ DATA (QUALITY GATE)</span>
+
+          <a href="#queueSection" class="sidebar-nav-item active" id="navReviewQueue">
+            <div class="nav-item-content">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Gbọngàn Àyẹ̀wò (Queue)</span>
+            </div>
+            <span class="nav-counter-pill" id="sidebarPendingCount">0</span>
+          </a>
+
+          <a href="#statsSection" class="sidebar-nav-item" id="navStats">
+            <div class="nav-item-content">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+              <span>Ìṣirò AI Brain (Metrics)</span>
+            </div>
+          </a>
+        </nav>
       </div>
 
-      <div class="dash-header-right">
-        <span class="quality-gate-tag">Quality Gate: Only Approved Data Enters AI Brain</span>
-        <div class="dash-user-menu">
-          <div class="user-avatar approver-avatar">🛡️</div>
-          <div class="user-meta">
-            <strong id="approverName">ÀRÒYÉ Approver</strong>
-            <span class="green-text">Linguistic Gatekeeper</span>
+      <!-- Sidebar Bottom: Portal Return & Approver Profile Card -->
+      <div class="sidebar-bottom">
+        <a href="/community" class="sidebar-back-link">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Padà sí Ilé (Portal Home)</span>
+        </a>
+
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-info">
+            <div class="user-avatar-circle approver">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="sidebar-user-details">
+              <span class="sidebar-user-name" id="approverName">ÀRÒYÉ Approver</span>
+              <span class="sidebar-user-meta" style="color: var(--emerald-green); font-weight: 600;">Linguistic Gatekeeper</span>
+            </div>
           </div>
-          <button class="logout-btn" id="logoutBtn" title="Logout">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <button class="btn-sidebar-logout" id="logoutBtn" title="Logout">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
               <polyline points="16 17 21 12 16 7"/>
               <line x1="21" y1="12" x2="9" y2="12"/>
@@ -37,73 +86,140 @@
           </button>
         </div>
       </div>
+    </aside>
+
+    <!-- ==================================================================== -->
+    <!-- 2. MAIN CONTENT AREA -->
+    <!-- ==================================================================== -->
+    <div class="dash-main-area">
+
+      <!-- TOPBAR -->
+      <header class="dash-topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open navigation menu">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="topbar-breadcrumb">
+            <h1 class="topbar-title">Ibi-Àyẹ̀wò & Ìfọwọ́sí Àwọn Ohùn</h1>
+            <span class="topbar-subtitle">ÀRÒYÉ Linguistic Quality Gatekeeper &bull; Sovereign Model Training Gate</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Live Gate Status Indicator -->
+          <div class="live-db-pill">
+            <span class="pulse-dot"></span>
+            <span>Quality Gate Active</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- DASHBOARD BODY -->
+      <main class="dash-body">
+        
+        <!-- Header Banner -->
+        <section class="dash-welcome-card approver-banner">
+          <div>
+            <h2 class="welcome-title">Ibi-Àyẹ̀wò & Ìfọwọ́sí Àwọn Ohùn (Linguistic Approval Gate)</h2>
+            <p class="welcome-sub">
+              Gbọ́ gbogbo ohùn tí àwọn olùkópa gbasílẹ̀ kí o sì fọwọ́sí àwọn tí kò ní ariwo ayika àti pé àmì ohùn wọn bá a mu.
+            </p>
+          </div>
+        </section>
+
+        <!-- REAL METRICS GRID (MODERN SVG ICONS) -->
+        <section class="dash-stats-grid" id="statsSection">
+          <!-- Pending Queue -->
+          <div class="dash-stat-box">
+            <div class="box-icon-container amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="box-val amber" id="apprPendingCount">0</h3>
+              <span class="box-label">Ohùn Tí Ó Wà Ní Ìdúró (Pending Queue)</span>
+            </div>
+          </div>
+
+          <!-- Approved for Brain -->
+          <div class="dash-stat-box">
+            <div class="box-icon-container green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="box-val green" id="apprApprovedCount">0</h3>
+              <span class="box-label">Tí a Ti Fọwọ́sí fún AI Brain</span>
+            </div>
+          </div>
+
+          <!-- Rejected Noise -->
+          <div class="dash-stat-box">
+            <div class="box-icon-container red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="box-val red" id="apprRejectedCount">0</h3>
+              <span class="box-label">Tí A Kọ̀ nítorí Ariwo (Rejected Noise/Tone)</span>
+            </div>
+          </div>
+
+          <!-- Contributors -->
+          <div class="dash-stat-box">
+            <div class="box-icon-container indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="box-val" id="apprContributorsCount">0</h3>
+              <span class="box-label">Àwọn Olùkópa tí Wọ́n Kópa (Contributors)</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- PENDING VOICE SUBMISSIONS QUEUE -->
+        <section class="dash-section" id="queueSection">
+          <div class="section-title-bar">
+            <h3 class="dash-section-heading">Àkójọ Àwọn Ohùn Tí Ó Wà Ní Ìdúró Àyẹ̀wò (Voice Review Queue)</h3>
+            <button class="btn-refresh-modern" id="refreshQueueBtn">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+              </svg>
+              <span>Tún Kà (Refresh Queue)</span>
+            </button>
+          </div>
+
+          <div id="voiceQueueContainer">
+            <!-- Rendered dynamically by approver.js with modern SVGs -->
+            <div class="empty-queue-box">
+              <svg class="empty-queue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 12h8"/>
+              </svg>
+              <p>Kò tí ì sí ohùn tí ó wà ní ìdúró àyẹ̀wò ní báyìí (All submissions reviewed!).</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
     </div>
-  </header>
-
-  <!-- APPROVER MAIN CONTENT -->
-  <main class="dash-main-container">
-    
-    <!-- Header Banner -->
-    <section class="dash-welcome-card approver-banner">
-      <div>
-        <h2 class="welcome-title">Ibi-Àyẹ̀wò & Ìfọwọ́sí Àwọn Ohùn (Linguistic Approval Gate)</h2>
-        <p class="welcome-sub">
-          Gbọ́ gbogbo ohùn tí àwọn olùkópa gbasílẹ̀ kí o sì fọwọ́sí àwọn tí kò ní ariwo ayika àti pé àmì ohùn wọn bá a mu.
-        </p>
-      </div>
-    </section>
-
-    <!-- REAL STATS COUNTERS -->
-    <section class="dash-stats-grid">
-      <div class="dash-stat-box">
-        <div class="box-icon orange">⏳</div>
-        <div>
-          <h3 class="box-val orange" id="apprPendingCount">0</h3>
-          <span class="box-label">Ohùn Tí Ó Wà Ní Ìdúró (Pending Queue)</span>
-        </div>
-      </div>
-
-      <div class="dash-stat-box">
-        <div class="box-icon green">🧠</div>
-        <div>
-          <h3 class="box-val green" id="apprApprovedCount">0</h3>
-          <span class="box-label">Tí a Ti Fọwọ́sí fún AI Brain</span>
-        </div>
-      </div>
-
-      <div class="dash-stat-box">
-        <div class="box-icon red">❌</div>
-        <div>
-          <h3 class="box-val red" id="apprRejectedCount">0</h3>
-          <span class="box-label">Tí A Kọ̀ nítorí Ariwo (Rejected Noise/Tone)</span>
-        </div>
-      </div>
-
-      <div class="dash-stat-box">
-        <div class="box-icon">👥</div>
-        <div>
-          <h3 class="box-val" id="apprContributorsCount">0</h3>
-          <span class="box-label">Àwọn Olùkópa tí Wọ́n Kópa (Contributors)</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- PENDING VOICE SUBMISSIONS QUEUE -->
-    <section class="dash-section">
-      <div class="section-title-bar">
-        <h3 class="dash-section-heading">Àkójọ Àwọn Ohùn Tí Ó Wà Ní Ìdúró Àyẹ̀wò (Voice Review Queue)</h3>
-        <button class="btn-refresh" id="refreshQueueBtn">🔄 Tún Kà (Refresh)</button>
-      </div>
-
-      <div id="voiceQueueContainer">
-        <!-- Rendered by approver.js -->
-        <div class="empty-queue-box">
-          <p>Kò tí ì sí ohùn tí ó wà ní ìdúró àyẹ̀wò ní báyìí.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
+  </div>
 
   <script src="/approver.js"></script>
 </body>

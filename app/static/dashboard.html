@@ -9,40 +9,111 @@
 </head>
 <body>
 
-  <!-- FIXED TOP HEADER -->
-  <header class="dash-fixed-header">
-    <div class="dash-header-container">
-      <div class="dash-header-left">
-        <a href="/community" class="dash-brand">
-          <img src="/logo.png" alt="ÀRÒYÉ" width="34" height="34">
-          <span class="dash-brand-name">ÀRÒYÉ</span>
-          <span class="dash-role-badge">Contributor</span>
-        </a>
-      </div>
+  <!-- MOBILE SIDEBAR BACKDROP -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
-      <div class="dash-header-right">
-        <!-- Wallet & Earnings Pill (Designed around future payments) -->
-        <div class="wallet-pill" title="Àkópọ̀ Èrè tí a fọwọ́sí">
-          <div class="wallet-stat">
-            <span class="wallet-label">Points:</span>
-            <strong class="wallet-val" id="headerPoints">0 pts</strong>
-          </div>
-          <div class="wallet-divider"></div>
-          <div class="wallet-stat">
-            <span class="wallet-label">Earnings:</span>
-            <strong class="wallet-val orange" id="headerEarnings">₦0.00</strong>
-          </div>
+  <div class="dash-app-layout">
+
+    <!-- ==================================================================== -->
+    <!-- 1. LEFT SIDEBAR -->
+    <!-- ==================================================================== -->
+    <aside class="dash-sidebar" id="dashSidebar">
+      <div class="sidebar-top">
+        
+        <!-- Brand -->
+        <div class="sidebar-brand-wrap">
+          <a href="/community" class="sidebar-brand">
+            <img src="/logo.png" alt="ÀRÒYÉ">
+            <span class="sidebar-brand-text">ÀRÒYÉ</span>
+          </a>
+          <span class="sidebar-role-badge">Contributor</span>
         </div>
 
-        <!-- User Profile Dropdown -->
-        <div class="dash-user-menu">
-          <div class="user-avatar" id="userAvatar">U</div>
-          <div class="user-meta">
-            <strong id="userName">User</strong>
-            <span id="userDialect">General Yoruba</span>
+        <!-- Navigation Menu -->
+        <nav class="sidebar-nav-section">
+          <span class="sidebar-section-label">PẸPẸ IṢẸ́ (WORKSPACE)</span>
+
+          <a href="#overview" class="sidebar-nav-item active" id="navOverview">
+            <div class="nav-item-content">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <span>Àkópọ̀ (Overview)</span>
+            </div>
+          </a>
+
+          <button class="sidebar-nav-item" id="navRecordSpeech">
+            <div class="nav-item-content">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+              <span>Gba Ohùn Sílẹ̀ (Record)</span>
+            </div>
+            <span class="nav-counter-pill">+50 pts</span>
+          </button>
+
+          <button class="sidebar-nav-item" id="navWriteText">
+            <div class="nav-item-content">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+              <span>Kọ Gbolohun (Write)</span>
+            </div>
+            <span class="nav-counter-pill">+40 pts</span>
+          </button>
+
+          <button class="sidebar-nav-item" id="navCulture">
+            <div class="nav-item-content">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span>Òwe & Àṣà (Culture)</span>
+            </div>
+            <span class="nav-counter-pill">+80 pts</span>
+          </button>
+
+          <a href="#submissionsSection" class="sidebar-nav-item" id="navSubmissions">
+            <div class="nav-item-content">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"/>
+                <line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                <line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+              <span>Àkọsílẹ̀ Mi (Submissions)</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Sidebar Bottom: Portal Return & User Profile Card -->
+      <div class="sidebar-bottom">
+        <a href="/community" class="sidebar-back-link">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Padà sí Ilé (Portal Home)</span>
+        </a>
+
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-info">
+            <div class="user-avatar-circle" id="userAvatar">U</div>
+            <div class="sidebar-user-details">
+              <span class="sidebar-user-name" id="userName">User</span>
+              <span class="sidebar-user-meta" id="userDialect">General Yoruba</span>
+            </div>
           </div>
-          <button class="logout-btn" id="logoutBtn" title="Logout">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <button class="btn-sidebar-logout" id="logoutBtn" title="Logout">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
               <polyline points="16 17 21 12 16 7"/>
               <line x1="21" y1="12" x2="9" y2="12"/>
@@ -50,143 +121,253 @@
           </button>
         </div>
       </div>
+    </aside>
+
+    <!-- ==================================================================== -->
+    <!-- 2. MAIN CONTENT AREA -->
+    <!-- ==================================================================== -->
+    <div class="dash-main-area">
+
+      <!-- TOPBAR -->
+      <header class="dash-topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open navigation menu">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="topbar-breadcrumb">
+            <h1 class="topbar-title">Àkópọ̀ Olùkópa</h1>
+            <span class="topbar-subtitle">Pẹpẹ Ìdánilẹ́kọ̀ọ́ ÀRÒYÉ AI &bull; Live Training Studio</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Live DB Status -->
+          <div class="live-db-pill">
+            <span class="pulse-dot"></span>
+            <span>Neon DB Connected</span>
+          </div>
+
+          <!-- Real Wallet & Points Pill -->
+          <div class="topbar-wallet-pill">
+            <div class="topbar-wallet-stat">
+              <svg class="topbar-wallet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span class="topbar-wallet-label">Points:</span>
+              <strong class="topbar-wallet-val" id="headerPoints">0 pts</strong>
+            </div>
+            <div class="topbar-wallet-divider"></div>
+            <div class="topbar-wallet-stat">
+              <svg class="topbar-wallet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+              </svg>
+              <span class="topbar-wallet-label">Earnings:</span>
+              <strong class="topbar-wallet-val orange" id="headerEarnings">₦0.00</strong>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DASHBOARD BODY -->
+      <main class="dash-body" id="overview">
+        
+        <!-- Welcome Card & Real Dynamic Level Radial -->
+        <section class="dash-welcome-card">
+          <div class="welcome-text-side">
+            <h2 class="welcome-title">Ẹ n lẹ́ o, <span id="welcomeUserName">Olùkópa</span></h2>
+            <p class="welcome-sub">
+              Ṣetán láti kọ́ ẹ̀rọ AI ÀRÒYÉ lónìí? Yan iṣẹ́ kan nísàlẹ̀ láti bẹ̀rẹ̀ sí í kójọ àwọn àmì-ẹ̀yẹ àti èrè rẹ.
+            </p>
+          </div>
+
+          <!-- Real Level Radial Progress -->
+          <div class="real-level-meter">
+            <div class="level-radial" id="radialMeter">
+              <div class="level-radial-inner">
+                <span id="levelPercentage">0%</span>
+              </div>
+            </div>
+            <div class="level-info">
+              <strong id="levelTitle">Level 1 Contributor</strong>
+              <span id="levelSubtitle">Beginner Contributor</span>
+              <small id="levelPointsRatio">0 / 100 points to Level 2</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- REAL METRICS GRID (MODERN SVG ICONS) -->
+        <section class="dash-stats-grid">
+          <!-- Stat 1: Speech -->
+          <div class="dash-stat-box">
+            <div class="box-icon-container orange">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="box-val" id="mySpeechCount">0</h3>
+              <span class="box-label">Àkọsílẹ̀ Ohùn Mi (Recordings)</span>
+            </div>
+          </div>
+
+          <!-- Stat 2: Text -->
+          <div class="dash-stat-box">
+            <div class="box-icon-container indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="box-val" id="myTextCount">0</h3>
+              <span class="box-label">Gbolohun Mi (Text Submissions)</span>
+            </div>
+          </div>
+
+          <!-- Stat 3: Approved -->
+          <div class="dash-stat-box">
+            <div class="box-icon-container green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="box-val green" id="myApprovedCount">0</h3>
+              <span class="box-label">Tí a Ti Fọwọ́sí (Approved Data)</span>
+            </div>
+          </div>
+
+          <!-- Stat 4: Pending -->
+          <div class="dash-stat-box">
+            <div class="box-icon-container amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="box-val amber" id="myPendingCount">0</h3>
+              <span class="box-label">Ní Ìdúró Àyẹ̀wò (Pending Queue)</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- CHOOSE A TASK TO PERFORM -->
+        <section class="dash-section">
+          <div class="section-title-bar">
+            <h3 class="dash-section-heading">Yan Iṣẹ́ Kan Lónìí (Available Tasks)</h3>
+            <span class="earn-info-note">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              <span>Iṣẹ́ kọ̀ọ̀kan ní àmì-ẹ̀yẹ àti èrè tí a fọwọ́sí</span>
+            </span>
+          </div>
+
+          <div class="dash-tasks-grid">
+            <!-- Task 1: Record Speech -->
+            <div class="dash-task-card">
+              <div class="task-card-icon-wrap orange">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                </svg>
+              </div>
+              <h4 class="task-title">Ṣe Àkọsílẹ̀ Ohùn (Record Speech)</h4>
+              <p class="task-desc">Ka gbolohun Yorùbá pẹ̀lú àmì ohùn tó ṣe kedere sílẹ̀ láìsí ariwo ayika.</p>
+              <div class="task-footer">
+                <span class="task-earning-pill">+50 pts (₦50)</span>
+                <button class="btn-start-task" id="openSpeechModal">
+                  <span>Bẹ̀rẹ̀ sí í Ka</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Task 2: Write Text -->
+            <div class="dash-task-card">
+              <div class="task-card-icon-wrap indigo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"/>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              </div>
+              <h4 class="task-title">Kọ Gbolohun Yorùbá (Submit Text)</h4>
+              <p class="task-desc">Kọ gbolohun Yorùbá tuntun pẹ̀lú ìtumọ̀ Gẹ̀ẹ́sì rẹ̀ fún ìkẹ́kọ̀ọ́ AI.</p>
+              <div class="task-footer">
+                <span class="task-earning-pill">+40 pts (₦40)</span>
+                <button class="btn-start-task" id="openTextModal">
+                  <span>Bẹ̀rẹ̀ sí í Kọ</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Task 3: Share Knowledge -->
+            <div class="dash-task-card">
+              <div class="task-card-icon-wrap emerald">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </div>
+              <h4 class="task-title">Òwe & Ìmọ̀ Àṣà (Proverbs & Culture)</h4>
+              <p class="task-desc">Fi òwe, ìtàn, tàbí ọ̀rọ̀ àbáláyé Yorùbá kún ibi-ìfipamọ́ ÀRÒYÉ.</p>
+              <div class="task-footer">
+                <span class="task-earning-pill">+80 pts (₦80)</span>
+                <button class="btn-start-task" id="openKnowledgeModal">
+                  <span>Bẹ̀rẹ̀ sí í Fi Kún</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MY RECENT SUBMISSIONS TRACKER -->
+        <section class="dash-section" id="submissionsSection">
+          <div class="section-title-bar">
+            <h3 class="dash-section-heading">Àwọn Iṣẹ́ Tí Mo Ti Firanṣẹ́ (My Submissions Status)</h3>
+          </div>
+
+          <div class="submissions-table-card">
+            <table class="submissions-table">
+              <thead>
+                <tr>
+                  <th>Irúfẹ́ (Type)</th>
+                  <th>Àkóónú (Content / Sentence)</th>
+                  <th>Ọjọ́ (Date)</th>
+                  <th>Ipo (Status)</th>
+                  <th>Èrè (Points)</th>
+                </tr>
+              </thead>
+              <tbody id="mySubmissionsTableBody">
+                <tr>
+                  <td colspan="5" style="text-align: center; color: var(--text-subtle); padding: 30px;">
+                    Kò tí ì sí iṣẹ́ tí o ti firanṣẹ́. Yan iṣẹ́ kan lókè láti bẹ̀rẹ̀!
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
     </div>
-  </header>
-
-  <!-- DASHBOARD BODY -->
-  <main class="dash-main-container">
-    
-    <!-- Welcome Bar & Level Meter (REAL NUMBERS) -->
-    <section class="dash-welcome-card">
-      <div class="welcome-text-side">
-        <h2 class="welcome-title">Ẹ n lẹ́ o, <span id="welcomeUserName">Olùkópa</span>! 👋</h2>
-        <p class="welcome-sub">
-          Ṣetán láti kọ́ ẹ̀rọ AI ÀRÒYÉ lónìí? Yan iṣẹ́ kan nísàlẹ̀ láti bẹ̀rẹ̀ sí í kójọ àwọn àmì-ẹ̀yẹ rẹ.
-        </p>
-      </div>
-
-      <!-- Real Level Radial Progress -->
-      <div class="real-level-meter">
-        <div class="level-radial" id="radialMeter">
-          <div class="level-radial-inner">
-            <span id="levelPercentage">0%</span>
-          </div>
-        </div>
-        <div class="level-info">
-          <strong id="levelTitle">Level 1 Contributor</strong>
-          <span id="levelSubtitle">Beginner Contributor</span>
-          <small id="levelPointsRatio">0 / 100 points to Level 2</small>
-        </div>
-      </div>
-    </section>
-
-    <!-- REAL USER STATISTICS CARDS -->
-    <section class="dash-stats-grid">
-      <div class="dash-stat-box">
-        <div class="box-icon">🎙️</div>
-        <div>
-          <h3 class="box-val" id="mySpeechCount">0</h3>
-          <span class="box-label">Àkọsílẹ̀ Ohùn Mi (My Recordings)</span>
-        </div>
-      </div>
-
-      <div class="dash-stat-box">
-        <div class="box-icon">📄</div>
-        <div>
-          <h3 class="box-val" id="myTextCount">0</h3>
-          <span class="box-label">Gbolohun Mi (My Text Submissions)</span>
-        </div>
-      </div>
-
-      <div class="dash-stat-box">
-        <div class="box-icon green">✅</div>
-        <div>
-          <h3 class="box-val green" id="myApprovedCount">0</h3>
-          <span class="box-label">Tí a Ti Fọwọ́sí (Approved by Approver)</span>
-        </div>
-      </div>
-
-      <div class="dash-stat-box">
-        <div class="box-icon orange">⏳</div>
-        <div>
-          <h3 class="box-val orange" id="myPendingCount">0</h3>
-          <span class="box-label">Ní Ìdúró Àyẹ̀wò (Pending Review)</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- CHOOSE A TASK TO PERFORM -->
-    <section class="dash-section">
-      <div class="section-title-bar">
-        <h3 class="dash-section-heading">Yan Iṣẹ́ Kan (Choose a Task)</h3>
-        <span class="earn-info-note">ℹ️ Iṣẹ́ kọ̀ọ̀kan ní àmì-ẹ̀yẹ àti èrè tí yóò wọ inú àkọọ́lẹ̀ rẹ</span>
-      </div>
-
-      <div class="dash-tasks-grid">
-        <!-- Task 1: Record Speech -->
-        <div class="dash-task-card">
-          <div class="task-card-icon">🎙️</div>
-          <h4 class="task-title">Ṣe Àkọsílẹ̀ Ohùn (Record Speech)</h4>
-          <p class="task-desc">Ka gbolohun Yorùbá pẹ̀lú àmì ohùn tó ṣe kedere sílẹ̀.</p>
-          <div class="task-footer">
-            <span class="task-earning-pill">+50 pts (₦50)</span>
-            <button class="btn-start-task" id="openSpeechModal">Bẹ̀rẹ̀ sí í Ka &rarr;</button>
-          </div>
-        </div>
-
-        <!-- Task 2: Write Text -->
-        <div class="dash-task-card">
-          <div class="task-card-icon">✍️</div>
-          <h4 class="task-title">Kọ Gbolohun Yorùbá (Submit Text)</h4>
-          <p class="task-desc">Kọ gbolohun Yorùbá tuntun pẹ̀lú ìtumọ̀ Gẹ̀ẹ́sì rẹ̀.</p>
-          <div class="task-footer">
-            <span class="task-earning-pill">+40 pts (₦40)</span>
-            <button class="btn-start-task" id="openTextModal">Bẹ̀rẹ̀ sí í Kọ &rarr;</button>
-          </div>
-        </div>
-
-        <!-- Task 3: Share Knowledge -->
-        <div class="dash-task-card">
-          <div class="task-card-icon">📖</div>
-          <h4 class="task-title">Òwe & Ìmọ̀ Àṣà (Proverbs & Culture)</h4>
-          <p class="task-desc">Fi òwe, ìtàn, tàbí ọ̀rọ̀ àbáláyé Yorùbá kún ibi-ìfipamọ́.</p>
-          <div class="task-footer">
-            <span class="task-earning-pill">+80 pts (₦80)</span>
-            <button class="btn-start-task" id="openKnowledgeModal">Bẹ̀rẹ̀ sí í Fi Kún &rarr;</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MY RECENT SUBMISSIONS TRACKER -->
-    <section class="dash-section">
-      <div class="section-title-bar">
-        <h3 class="dash-section-heading">Àwọn Iṣẹ́ Tí Mo Ti Firanṣẹ́ (My Submissions Status)</h3>
-      </div>
-
-      <div class="submissions-table-card">
-        <table class="submissions-table">
-          <thead>
-            <tr>
-              <th>Irúfẹ́ (Type)</th>
-              <th>Àkóónú (Content / Sentence)</th>
-              <th>Ọjọ́ (Date)</th>
-              <th>Ipo (Status)</th>
-              <th>Èrè (Points)</th>
-            </tr>
-          </thead>
-          <tbody id="mySubmissionsTableBody">
-            <tr>
-              <td colspan="5" style="text-align: center; color: var(--text-subtle); padding: 30px;">
-                Kò tí ì sí iṣẹ́ tí o ti firanṣẹ́. Yan iṣẹ́ kan lókè láti bẹ̀rẹ̀!
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
+  </div>
 
   <!-- ==================================================================== -->
   <!-- MODAL: RECORD SPEECH STUDIO -->
@@ -194,7 +375,15 @@
   <div class="dash-modal-overlay" id="speechModal">
     <div class="dash-modal-card">
       <button class="modal-close-x" data-close>&times;</button>
-      <h3 class="modal-h3">🎙️ Ṣe Àkọsílẹ̀ Ohùn Yorùbá</h3>
+      
+      <div class="modal-header-with-icon">
+        <svg class="modal-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="22"/>
+        </svg>
+        <h3 class="modal-h3">Ṣe Àkọsílẹ̀ Ohùn Yorùbá</h3>
+      </div>
       <p class="modal-sub">Ka gbolohun yìí pẹ̀lú ohùn tó ṣe kedere sílẹ̀ láìsí ariwo.</p>
 
       <div class="prompt-box">
@@ -208,7 +397,7 @@
 
       <div class="record-controls-wrap">
         <button class="big-record-circle" id="micRecordBtn" title="Click to record">
-          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
             <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
             <line x1="12" y1="19" x2="12" y2="22"/>
@@ -217,11 +406,11 @@
         <span class="record-instruction" id="micInstruction">Tẹ bọ́tìnì láti bẹ̀rẹ̀ sí í ka ọ̀rọ̀ náà</span>
       </div>
 
-      <audio id="audioPreview" controls style="width: 100%; display: none; margin-bottom: 18px;"></audio>
+      <audio id="audioPreview" controls style="width: 100%; display: none; margin-bottom: 18px; border-radius: 8px;"></audio>
 
       <div class="modal-btn-row">
-        <button class="btn-cancel" data-close>Fagilé</button>
-        <button class="btn-submit" id="submitSpeechBtn" disabled>Firanṣẹ́ sí Approvers (+50 pts)</button>
+        <button type="button" class="btn-cancel" data-close>Fagilé</button>
+        <button type="button" class="btn-submit" id="submitSpeechBtn" disabled>Firanṣẹ́ sí Approvers (+50 pts)</button>
       </div>
     </div>
   </div>
@@ -232,56 +421,69 @@
   <div class="dash-modal-overlay" id="textModal">
     <div class="dash-modal-card">
       <button class="modal-close-x" data-close>&times;</button>
-      <h3 class="modal-h3">✍️ Kọ Gbolohun Yorùbá</h3>
-      <p class="modal-sub">Kọ gbolohun Yorùbá pẹ̀lú àmì ohùn tí ó tọ́.</p>
+      
+      <div class="modal-header-with-icon">
+        <svg class="modal-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+        <h3 class="modal-h3">Kọ Gbolohun Yorùbá Tuntun</h3>
+      </div>
+      <p class="modal-sub">Kọ gbolohun pẹ̀lú àmì ohùn tí ó tọ́ fún ìdánilẹ́kọ̀ọ́ AI.</p>
 
-      <form id="submitTextForm">
+      <form class="modal-form" id="submitTextForm">
         <div class="modal-form-group">
-          <label class="form-label">Gbolohun ní èdè Yorùbá:</label>
-          <textarea class="form-textarea" id="textYorubaInput" placeholder="Kọ ọ̀rọ̀ Yorùbá síbí pẹ̀lú àmì ohùn..." required></textarea>
+          <label class="modal-label" for="yorubaTextInput">Gbolohun Yorùbá (pẹ̀lú àmì ohùn)</label>
+          <textarea id="yorubaTextInput" class="modal-textarea" rows="3" placeholder="fún àpẹẹrẹ: Ọmọ tó mọ owó kọ́ ló máa jẹ ẹ́." required></textarea>
         </div>
 
         <div class="modal-form-group">
-          <label class="form-label">Ìtumọ̀ ní èdè Gẹ̀ẹ́sì (Optional English Translation):</label>
-          <input type="text" class="form-input" id="textEnglishInput" placeholder="English translation">
+          <label class="modal-label" for="englishTranslationInput">Ìtumọ̀ ní Èdè Gẹ̀ẹ́sì (English Translation)</label>
+          <input type="text" id="englishTranslationInput" class="modal-input" placeholder="e.g. A child who knows how to earn will enjoy wealth." required />
         </div>
 
         <div class="modal-btn-row">
           <button type="button" class="btn-cancel" data-close>Fagilé</button>
-          <button type="submit" class="btn-submit">Firanṣẹ́ sí Approvers (+40 pts)</button>
+          <button type="submit" class="btn-submit">Firanṣẹ́ Gbolohun (+40 pts)</button>
         </div>
       </form>
     </div>
   </div>
 
   <!-- ==================================================================== -->
-  <!-- MODAL: SHARE KNOWLEDGE -->
+  <!-- MODAL: PROVERBS & CULTURAL KNOWLEDGE -->
   <!-- ==================================================================== -->
   <div class="dash-modal-overlay" id="knowledgeModal">
     <div class="dash-modal-card">
       <button class="modal-close-x" data-close>&times;</button>
-      <h3 class="modal-h3">📖 Òwe & Ìmọ̀ Àṣà Yorùbá</h3>
-      <p class="modal-sub">Fi òwe, ìtàn, tàbí ìmọ̀ àṣà kún un.</p>
+      
+      <div class="modal-header-with-icon">
+        <svg class="modal-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <h3 class="modal-h3">Òwe & Ìmọ̀ Àṣà Yorùbá</h3>
+      </div>
+      <p class="modal-sub">Fi òwe, ìtàn, tàbí àkópọ̀ àṣà kún ibi-ìfipamọ́ ÀRÒYÉ.</p>
 
-      <form id="submitKnowledgeForm">
+      <form class="modal-form" id="submitKnowledgeForm">
         <div class="modal-form-group">
-          <label class="form-label">Òwe tàbí Àkọlé:</label>
-          <input type="text" class="form-input" id="knowTitleInput" placeholder="Fún àpẹẹrẹ: Òwe lẹṣin ọ̀rọ̀..." required>
+          <label class="modal-label" for="proverbInput">Òwe tàbí Ọ̀rọ̀ Àṣà</label>
+          <textarea id="proverbInput" class="modal-textarea" rows="2" placeholder="fún àpẹẹrẹ: Ilé la ti ń kọ́ ẹ̀ṣọ́ ròde." required></textarea>
         </div>
 
         <div class="modal-form-group">
-          <label class="form-label">Ìtumọ̀ àti Ẹ̀kọ́ tí ó wà nínú rẹ̀:</label>
-          <textarea class="form-textarea" id="knowMeaningInput" placeholder="Kí ni ìtumọ̀ rẹ̀?" required></textarea>
+          <label class="modal-label" for="meaningInput">Ìtumọ̀ & Ẹ̀kọ́ Rẹ̀</label>
+          <textarea id="meaningInput" class="modal-textarea" rows="2" placeholder="Ẹ̀kọ́ tí ó wà nínú òwe náà..."></textarea>
         </div>
 
         <div class="modal-form-group">
-          <label class="form-label">Ẹ̀ka-èdè (Dialect):</label>
-          <select class="form-select" id="knowDialectSelect">
-            <option value="General" selected>Yorùbá Àjùmọ̀lò</option>
-            <option value="Oyo">Ọ̀yọ́</option>
-            <option value="Ekiti">Èkìtì</option>
-            <option value="Ijebu">Ìjẹ̀bú</option>
-            <option value="Ondo">Òndó</option>
+          <label class="modal-label" for="categorySelect">Ẹ̀ka Ìmọ̀ (Category)</label>
+          <select id="categorySelect" class="modal-select">
+            <option value="proverb">Òwe (Proverb)</option>
+            <option value="idiom">Àkànlò Èdè (Idiom)</option>
+            <option value="history">Ìtàn Àtẹnudẹ́nu (Folklore & History)</option>
+            <option value="dialect_word">Ọ̀rọ̀ Ẹ̀ka-èdè (Dialect Variety Word)</option>
           </select>
         </div>
 
