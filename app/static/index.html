@@ -4,24 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ÀRÒYÉ — Your Yoruba Voice AI</title>
-  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app-layout">
+  <div class="app-layout" id="appLayout">
     
     <!-- LEFT SIDEBAR (Desktop) -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
+      
       <div class="brand-header">
-        <div class="brand-logo">
-          <img src="logo.svg" alt="ÀRÒYÉ Logo" class="logo-img">
+        <div class="brand-left">
+          <div class="brand-logo">
+            <img src="logo.jpg" alt="ÀRÒYÉ Logo" class="logo-img">
+          </div>
+          <div class="brand-text">
+            <h1 class="brand-name">ÀRÒYÉ</h1>
+            <p class="brand-tagline">Your Yoruba Voice AI</p>
+          </div>
         </div>
-        <div class="brand-text">
-          <h1 class="brand-name">ÀRÒYÉ</h1>
-          <p class="brand-tagline">Your Yoruba Voice AI</p>
-        </div>
+        <!-- Desktop Collapse Button -->
+        <button class="collapse-btn" id="collapseSidebarBtn" title="Collapse sidebar">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <line x1="9" y1="3" x2="9" y2="21"/>
+            <polyline points="15 10 13 12 15 14"/>
+          </svg>
+        </button>
       </div>
 
+      <!-- Navigation Tabs -->
       <nav class="nav-menu">
         <button class="nav-item active" data-tab="chat">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -53,111 +65,288 @@
         </button>
       </nav>
 
+      <!-- Bottom Profile / Model Status Card (ChatGPT Style) -->
       <div class="sidebar-footer">
-        <div class="voice-badge-card">
-          <div class="sound-wave-icon">
-            <span class="bar bar-1"></span>
-            <span class="bar bar-2"></span>
-            <span class="bar bar-3"></span>
-            <span class="bar bar-4"></span>
+        <div class="model-badge-card">
+          <div class="badge-avatar">
+            <img src="logo.jpg" alt="ÀRÒYÉ">
           </div>
-          <div class="voice-badge-text">
-            <strong>Speak Yoruba</strong>
-            <span>Get real answers</span>
+          <div class="badge-text">
+            <strong>ÀRÒYÉ Model</strong>
+            <span class="version-label">Research Preview (v0.1)</span>
           </div>
         </div>
         <div class="status-indicator">
           <span class="status-dot"></span>
-          <span class="status-text">Online</span>
+          <span class="status-text">Online &bull; Yoruba CUDA Model</span>
         </div>
       </div>
     </aside>
 
-    <!-- MAIN CHAT CONTAINER -->
+    <!-- MAIN CONTENT VIEWPORT -->
     <main class="main-content">
       
-      <!-- Top Mobile / Desktop Header -->
+      <!-- Top Header -->
       <header class="top-header">
         <div class="header-left">
-          <div class="mobile-logo-wrap">
-            <img src="logo.svg" alt="ÀRÒYÉ" class="mobile-logo">
-          </div>
-          <div>
-            <h2 class="header-title">ÀRÒYÉ</h2>
-            <p class="header-sub">Always here to help</p>
-          </div>
-        </div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="18" x2="21" y2="18"/>
-          </svg>
-        </button>
-      </header>
-
-      <!-- Chat Stream Area -->
-      <div class="chat-viewport" id="chatViewport">
-        
-        <!-- Welcome Hero (shown when no messages) -->
-        <div class="hero-welcome" id="heroWelcome">
-          <div class="hero-emblem">
-            <img src="logo.svg" alt="ÀRÒYÉ" class="hero-logo-img">
-          </div>
-          <h2 class="hero-title">Báwo ni?</h2>
-          <p class="hero-description">
-            Mo wà níbí láti ràn ọ́ lọ́wọ́. Béèrè ohunkohun nípa àṣà, ìtàn, èdè Yorùbá àti bẹ́ẹ̀ bẹ́ẹ̀ lọ.
-          </p>
-        </div>
-
-        <!-- Chat messages will be dynamically appended here -->
-        <div class="messages-container" id="messagesContainer"></div>
-      </div>
-
-      <!-- Input Footer Section -->
-      <footer class="chat-input-area">
-        
-        <!-- Quick Yoruba Diacritic Bar (Effortless Tone Marks) -->
-        <div class="diacritic-toolbar">
-          <span class="diacritic-label">Àmì:</span>
-          <button type="button" class="accent-btn" data-char="ẹ">ẹ</button>
-          <button type="button" class="accent-btn" data-char="ọ">ọ</button>
-          <button type="button" class="accent-btn" data-char="ṣ">ṣ</button>
-          <button type="button" class="accent-btn" data-char="á">á</button>
-          <button type="button" class="accent-btn" data-char="à">à</button>
-          <button type="button" class="accent-btn" data-char="é">é</button>
-          <button type="button" class="accent-btn" data-char="è">è</button>
-          <button type="button" class="accent-btn" data-char="ó">ó</button>
-          <button type="button" class="accent-btn" data-char="ò">ò</button>
-          <button type="button" class="accent-btn" data-char="ń">ń</button>
-        </div>
-
-        <!-- Main Input Capsule -->
-        <form class="input-capsule" id="chatForm">
-          <button type="button" class="mic-btn" id="micBtn" title="Speak Yoruba (Voice Input)">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-              <line x1="12" y1="19" x2="12" y2="22"/>
+          <!-- Floating button to expand sidebar when collapsed -->
+          <button class="expand-sidebar-btn" id="expandSidebarBtn" title="Open sidebar">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <line x1="9" y1="3" x2="9" y2="21"/>
+              <polyline points="13 10 15 12 13 14"/>
             </svg>
           </button>
           
-          <input 
-            type="text" 
-            id="userInput" 
-            class="text-input" 
-            placeholder="Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀..." 
-            autocomplete="off"
-            required
-          />
+          <div class="mobile-logo-wrap">
+            <img src="logo.jpg" alt="ÀRÒYÉ" class="mobile-logo">
+          </div>
 
-          <button type="submit" class="send-btn" id="sendBtn" title="Send">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          <div>
+            <h2 class="header-title" id="pageTitle">Chat</h2>
+            <p class="header-sub">Always here to help</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="menu-toggle" id="menuToggle" aria-label="Toggle Mobile Menu">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
           </button>
-        </form>
-      </footer>
+        </div>
+      </header>
+
+      <!-- ================================================================== -->
+      <!-- TAB 1: CHAT VIEW -->
+      <!-- ================================================================== -->
+      <section class="tab-view active" id="tabChat">
+        <div class="chat-viewport" id="chatViewport">
+          
+          <!-- Welcome Hero (Centered, no suggested prompts) -->
+          <div class="hero-welcome" id="heroWelcome">
+            <div class="hero-emblem">
+              <img src="logo.jpg" alt="ÀRÒYÉ" class="hero-logo-img">
+            </div>
+            <h2 class="hero-title">Báwo ni?</h2>
+            <p class="hero-description">
+              Mo wà níbí láti ràn ọ́ lọ́wọ́. Béèrè ohunkohun nípa àṣà, ìtàn, èdè Yorùbá àti bẹ́ẹ̀ bẹ́ẹ̀ lọ.
+            </p>
+          </div>
+
+          <!-- Chat messages stream -->
+          <div class="messages-container" id="messagesContainer"></div>
+        </div>
+
+        <!-- Chat Input Footer Section -->
+        <footer class="chat-input-area">
+          <!-- Quick Yoruba Accent Helper -->
+          <div class="diacritic-toolbar">
+            <span class="diacritic-label">Àmì:</span>
+            <button type="button" class="accent-btn" data-char="ẹ">ẹ</button>
+            <button type="button" class="accent-btn" data-char="ọ">ọ</button>
+            <button type="button" class="accent-btn" data-char="ṣ">ṣ</button>
+            <button type="button" class="accent-btn" data-char="á">á</button>
+            <button type="button" class="accent-btn" data-char="à">à</button>
+            <button type="button" class="accent-btn" data-char="é">é</button>
+            <button type="button" class="accent-btn" data-char="è">è</button>
+            <button type="button" class="accent-btn" data-char="ó">ó</button>
+            <button type="button" class="accent-btn" data-char="ò">ò</button>
+            <button type="button" class="accent-btn" data-char="ń">ń</button>
+          </div>
+
+          <!-- Input Capsule -->
+          <form class="input-capsule" id="chatForm">
+            <button type="button" class="mic-btn" id="micBtn" title="Speak Yoruba">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </button>
+            
+            <input 
+              type="text" 
+              id="userInput" 
+              class="text-input" 
+              placeholder="Bẹ̀rẹ̀ sí í kọ tàbí sọ̀rọ̀..." 
+              autocomplete="off"
+              required
+            />
+
+            <button type="submit" class="send-btn" id="sendBtn" title="Send">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </form>
+
+          <!-- Disclaimer in Yoruba (ChatGPT style) -->
+          <p class="ai-disclaimer">
+            ÀRÒYÉ lè ṣe àṣìṣe lẹ́ẹ̀kọ̀ọ̀kan. Ẹ rí i dájú pé ẹ fìdí àwọn ìmọ̀ pàtàkì múlẹ̀.
+          </p>
+        </footer>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TAB 2: VOICE MODE VIEW -->
+      <!-- ================================================================== -->
+      <section class="tab-view" id="tabVoice">
+        <div class="voice-studio-container">
+          <div class="voice-hero">
+            <div class="voice-avatar-pulse">
+              <img src="logo.jpg" alt="ÀRÒYÉ Voice" class="voice-hero-logo">
+              <div class="pulse-ring ring-1"></div>
+              <div class="pulse-ring ring-2"></div>
+              <div class="pulse-ring ring-3"></div>
+            </div>
+            
+            <h3 class="voice-status-heading" id="voiceStatusHeading">Sọ̀rọ̀ ní èdè Yorùbá</h3>
+            <p class="voice-status-sub" id="voiceStatusSub">ÀRÒYÉ ti wà ní ìmúrasílẹ̀ láti tẹ́tí sí ọ.</p>
+
+            <button class="voice-action-btn" id="voiceToggleActionBtn">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+              <span id="voiceBtnLabel">Bẹ̀rẹ̀ Ìsọ̀rọ̀ (Start Speaking)</span>
+            </button>
+          </div>
+
+          <div class="voice-transcript-card">
+            <div class="card-header-bar">
+              <span class="transcript-tag">Ohun tí o sọ (Transcript):</span>
+            </div>
+            <p class="transcript-text" id="voiceLiveTranscript">Kò tí ì sí ọ̀rọ̀ kankan...</p>
+          </div>
+
+          <div class="voice-response-card" id="voiceResponseCard" style="display: none;">
+            <div class="card-header-bar">
+              <span class="transcript-tag">Èsì ÀRÒYÉ (Voice Response):</span>
+              <button class="play-audio-btn" id="replayVoiceBtn">🔊 Gbọ́ (Listen)</button>
+            </div>
+            <p class="voice-reply-text" id="voiceReplyText"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TAB 3: HISTORY VIEW -->
+      <!-- ================================================================== -->
+      <section class="tab-view" id="tabHistory">
+        <div class="history-container">
+          <div class="section-top-bar">
+            <div>
+              <h3 class="section-heading">Àkọsílẹ̀ Ìfọ̀rọ̀wérọ̀ (History)</h3>
+              <p class="section-sub">Àwọn ìfọ̀rọ̀wérọ̀ tí o ti ṣe pẹ̀lú ÀRÒYÉ lẹ́yìn.</p>
+            </div>
+            <button class="clear-history-btn" id="clearHistoryBtn">Pa Gbogbo Rẹ̀ Rẹ́ (Clear)</button>
+          </div>
+
+          <div class="history-list" id="historyList">
+            <div class="history-card">
+              <div class="history-card-header">
+                <span class="history-card-title">Ìbẹ̀rẹ̀ Ìkíni àti Ìbọ̀wọ̀</span>
+                <span class="history-card-date">Lónìí</span>
+              </div>
+              <p class="history-card-preview">Báwo ni? — Àlàáfíà ni o! Inú mi dùn láti bá ọ sọ̀rọ̀...</p>
+            </div>
+
+            <div class="history-card">
+              <div class="history-card-header">
+                <span class="history-card-title">Ìtàn Ilé-Ifẹ̀ àti Odùduwà</span>
+                <span class="history-card-date">Àná</span>
+              </div>
+              <p class="history-card-preview">Kí ni ìtàn Ilé-Ifẹ̀? — Ilé-Ifẹ̀ ni orísun àti ìbẹ̀rẹ̀ gbogbo ọmọ Yorùbá...</p>
+            </div>
+
+            <div class="history-card">
+              <div class="history-card-header">
+                <span class="history-card-title">Òwe Yorùbá àti Ìtumọ̀</span>
+                <span class="history-card-date">Ọjọ́ kẹta sẹ́yìn</span>
+              </div>
+              <p class="history-card-preview">Ọmọdé kò mọ egbò, ó ń pè é ní eṣinṣin...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TAB 4: SETTINGS VIEW -->
+      <!-- ================================================================== -->
+      <section class="tab-view" id="tabSettings">
+        <div class="settings-container">
+          <div class="section-top-bar">
+            <div>
+              <h3 class="section-heading">Ètò Ẹ̀rọ (Settings)</h3>
+              <p class="section-sub">Ṣètò bí ÀRÒYÉ ṣe ń sọ̀rọ̀ àti bí ó ṣe ń ṣiṣẹ́.</p>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h4 class="card-group-title">Ètò Ohùn (Voice Settings)</h4>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Irúfẹ́ Ohùn (Voice Gender)</strong>
+                <span>Yan ohùn akọ tàbí abo fún ìdáhùn.</span>
+              </div>
+              <select class="setting-select" id="settingVoiceGender">
+                <option value="male" selected>Ohùn Ọkùnrin (Male Voice)</option>
+                <option value="female">Ohùn Obìnrin (Female Voice)</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Èdè Yorùbá (Dialect)</strong>
+                <span>Èdè àjùmọ̀lò tàbí ẹ̀ka-èdè pàtó kan.</span>
+              </div>
+              <select class="setting-select" id="settingDialect">
+                <option value="general" selected>Yorùbá Àjùmọ̀lò (General Yoruba)</option>
+                <option value="oyo">Èdè Ọ̀yọ́</option>
+                <option value="ekiti">Èdè Èkìtì</option>
+                <option value="ijebu">Èdè Ìjẹ̀bú</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Ìyára Ìsọ̀rọ̀ (Speech Speed)</strong>
+                <span>Ìyára bí ohùn ṣe ń dún.</span>
+              </div>
+              <select class="setting-select" id="settingSpeed">
+                <option value="normal" selected>Déédéé (Normal)</option>
+                <option value="slow">Pẹ̀lẹ́ (Slow)</option>
+                <option value="fast">Yára (Fast)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h4 class="card-group-title">Àlàyé Ẹ̀rọ (System Information)</h4>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Orúkọ Ẹ̀rọ (AI Model)</strong>
+                <span>ÀRÒYÉ v0.1 Sovereign Yoruba Transformer</span>
+              </div>
+              <span class="badge-status-pill">943,744 Parameters</span>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Neon PostgreSQL Database</strong>
+                <span>Connected & Seeded Cloud Database</span>
+              </div>
+              <span class="badge-status-pill green">Connected</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- MOBILE BOTTOM DOCK (Visible on phone screens) -->
       <nav class="mobile-dock">
