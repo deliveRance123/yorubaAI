@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ÀRÒYÉ — Your Yoruba Voice AI</title>
-  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="icon" type="image/png" href="logo.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app-layout" id="appLayout">
     
-    <!-- LEFT SIDEBAR (Desktop) -->
+    <!-- LEFT SIDEBAR (ChatGPT-style mini-rail & expandable) -->
     <aside class="sidebar" id="sidebar">
       
       <div class="brand-header">
-        <div class="brand-left">
+        <div class="brand-left" id="brandLogo" title="ÀRÒYÉ">
           <div class="brand-logo">
-            <img src="logo.jpg" alt="ÀRÒYÉ Logo" class="logo-img">
+            <img src="logo.png" alt="ÀRÒYÉ Logo" class="logo-img">
           </div>
           <div class="brand-text">
             <h1 class="brand-name">ÀRÒYÉ</h1>
@@ -33,52 +33,40 @@
         </button>
       </div>
 
-      <!-- Navigation Tabs -->
+      <!-- Navigation Tabs: Chat (with inline voice), History, Settings -->
       <nav class="nav-menu">
-        <button class="nav-item active" data-tab="chat">
+        <button class="nav-item active" data-tab="chat" title="Chat & Voice">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
-          <span>Chat</span>
+          <span class="nav-label">Chat</span>
         </button>
-        <button class="nav-item" data-tab="voice">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-            <line x1="12" y1="19" x2="12" y2="22"/>
-          </svg>
-          <span>Voice</span>
-        </button>
-        <button class="nav-item" data-tab="history">
+        <button class="nav-item" data-tab="history" title="Àkọsílẹ̀ (History)">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"/>
             <polyline points="12 6 12 12 16 14"/>
           </svg>
-          <span>History</span>
+          <span class="nav-label">Àkọsílẹ̀ (History)</span>
         </button>
-        <button class="nav-item" data-tab="settings">
+        <button class="nav-item" data-tab="settings" title="Ètò Ẹ̀rọ (Settings)">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="3"/>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
           </svg>
-          <span>Settings</span>
+          <span class="nav-label">Ètò Ẹ̀rọ (Settings)</span>
         </button>
       </nav>
 
-      <!-- Bottom Profile / Model Status Card (ChatGPT Style) -->
+      <!-- Bottom Profile / Model Status Card -->
       <div class="sidebar-footer">
-        <div class="model-badge-card">
+        <div class="model-badge-card" title="ÀRÒYÉ Model (Research Preview v0.1)">
           <div class="badge-avatar">
-            <img src="logo.jpg" alt="ÀRÒYÉ">
+            <img src="logo.png" alt="ÀRÒYÉ">
           </div>
           <div class="badge-text">
-            <strong>ÀRÒYÉ Model</strong>
+            <strong>ÀRÒYÉ</strong>
             <span class="version-label">Research Preview (v0.1)</span>
           </div>
-        </div>
-        <div class="status-indicator">
-          <span class="status-dot"></span>
-          <span class="status-text">Online &bull; Yoruba CUDA Model</span>
         </div>
       </div>
     </aside>
@@ -86,7 +74,7 @@
     <!-- MAIN CONTENT VIEWPORT -->
     <main class="main-content">
       
-      <!-- Top Header -->
+      <!-- Top Header with Search and Three Dots Menu -->
       <header class="top-header">
         <div class="header-left">
           <!-- Floating button to expand sidebar when collapsed -->
@@ -99,7 +87,7 @@
           </button>
           
           <div class="mobile-logo-wrap">
-            <img src="logo.jpg" alt="ÀRÒYÉ" class="mobile-logo">
+            <img src="logo.png" alt="ÀRÒYÉ" class="mobile-logo">
           </div>
 
           <div>
@@ -109,6 +97,68 @@
         </div>
 
         <div class="header-right">
+          <!-- Chat Search Bar -->
+          <div class="header-search-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="chatSearchInput" class="header-search-input" placeholder="Wá nínú àkọsílẹ̀... (Search history)">
+          </div>
+
+          <!-- Three Dots Menu Button & Dropdown -->
+          <div class="header-menu-container">
+            <button class="header-icon-btn" id="moreMenuBtn" title="More options" aria-label="More options">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+
+            <div class="more-dropdown" id="moreDropdown">
+              <button class="menu-action-item" data-action="files">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <span>Fáìlì (Files)</span>
+              </button>
+              <button class="menu-action-item" data-action="pin">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="17" x2="12" y2="22"/>
+                  <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.89A2 2 0 0 1 15 10.77V5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5.77a2 2 0 0 1-1.11 1.79l-1.78.89A2 2 0 0 0 5 15.24V17z"/>
+                </svg>
+                <span>Pínnì Ìfọ̀rọ̀wérọ̀ (Pin chat)</span>
+              </button>
+              <button class="menu-action-item" data-action="archive">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="21 8 21 21 3 21 3 8"/>
+                  <rect x="1" y="3" width="22" height="5"/>
+                  <line x1="10" y1="12" x2="14" y2="12"/>
+                </svg>
+                <span>Àkójọpọ̀ (Archive)</span>
+              </button>
+              <button class="menu-action-item" data-action="move">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                  <polyline points="12 11 12 17"/>
+                  <polyline points="9 14 12 11 15 14"/>
+                </svg>
+                <span>Gbe lọ sí iṣẹ́-àkànṣe (Move to project)</span>
+              </button>
+              <div class="menu-divider"></div>
+              <button class="menu-action-item danger" data-action="delete">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                <span>Pa ìfọ̀rọ̀wérọ̀ rẹ́ (Delete chat)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile drawer toggle -->
           <button class="menu-toggle" id="menuToggle" aria-label="Toggle Mobile Menu">
             <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
               <line x1="3" y1="6" x2="21" y2="6"/>
@@ -120,15 +170,15 @@
       </header>
 
       <!-- ================================================================== -->
-      <!-- TAB 1: CHAT VIEW -->
+      <!-- TAB 1: CHAT VIEW (Unified Chat + Voice Speech Recognition) -->
       <!-- ================================================================== -->
       <section class="tab-view active" id="tabChat">
         <div class="chat-viewport" id="chatViewport">
           
-          <!-- Welcome Hero (Centered, no suggested prompts) -->
+          <!-- Welcome Hero (Clean centered, zero shadow, no suggested pills) -->
           <div class="hero-welcome" id="heroWelcome">
             <div class="hero-emblem">
-              <img src="logo.jpg" alt="ÀRÒYÉ" class="hero-logo-img">
+              <img src="logo.png" alt="ÀRÒYÉ" class="hero-logo-img">
             </div>
             <h2 class="hero-title">Báwo ni?</h2>
             <p class="hero-description">
@@ -157,9 +207,9 @@
             <button type="button" class="accent-btn" data-char="ń">ń</button>
           </div>
 
-          <!-- Input Capsule -->
+          <!-- Input Capsule with Voice Mic + Text Input + Send -->
           <form class="input-capsule" id="chatForm">
-            <button type="button" class="mic-btn" id="micBtn" title="Speak Yoruba">
+            <button type="button" class="mic-btn" id="micBtn" title="Speak Yoruba (Voice Input)">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
                 <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
@@ -191,50 +241,7 @@
       </section>
 
       <!-- ================================================================== -->
-      <!-- TAB 2: VOICE MODE VIEW -->
-      <!-- ================================================================== -->
-      <section class="tab-view" id="tabVoice">
-        <div class="voice-studio-container">
-          <div class="voice-hero">
-            <div class="voice-avatar-pulse">
-              <img src="logo.jpg" alt="ÀRÒYÉ Voice" class="voice-hero-logo">
-              <div class="pulse-ring ring-1"></div>
-              <div class="pulse-ring ring-2"></div>
-              <div class="pulse-ring ring-3"></div>
-            </div>
-            
-            <h3 class="voice-status-heading" id="voiceStatusHeading">Sọ̀rọ̀ ní èdè Yorùbá</h3>
-            <p class="voice-status-sub" id="voiceStatusSub">ÀRÒYÉ ti wà ní ìmúrasílẹ̀ láti tẹ́tí sí ọ.</p>
-
-            <button class="voice-action-btn" id="voiceToggleActionBtn">
-              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                <line x1="12" y1="19" x2="12" y2="22"/>
-              </svg>
-              <span id="voiceBtnLabel">Bẹ̀rẹ̀ Ìsọ̀rọ̀ (Start Speaking)</span>
-            </button>
-          </div>
-
-          <div class="voice-transcript-card">
-            <div class="card-header-bar">
-              <span class="transcript-tag">Ohun tí o sọ (Transcript):</span>
-            </div>
-            <p class="transcript-text" id="voiceLiveTranscript">Kò tí ì sí ọ̀rọ̀ kankan...</p>
-          </div>
-
-          <div class="voice-response-card" id="voiceResponseCard" style="display: none;">
-            <div class="card-header-bar">
-              <span class="transcript-tag">Èsì ÀRÒYÉ (Voice Response):</span>
-              <button class="play-audio-btn" id="replayVoiceBtn">🔊 Gbọ́ (Listen)</button>
-            </div>
-            <p class="voice-reply-text" id="voiceReplyText"></p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================================================================== -->
-      <!-- TAB 3: HISTORY VIEW -->
+      <!-- TAB 2: HISTORY VIEW -->
       <!-- ================================================================== -->
       <section class="tab-view" id="tabHistory">
         <div class="history-container">
@@ -247,35 +254,15 @@
           </div>
 
           <div class="history-list" id="historyList">
-            <div class="history-card">
-              <div class="history-card-header">
-                <span class="history-card-title">Ìbẹ̀rẹ̀ Ìkíni àti Ìbọ̀wọ̀</span>
-                <span class="history-card-date">Lónìí</span>
-              </div>
-              <p class="history-card-preview">Báwo ni? — Àlàáfíà ni o! Inú mi dùn láti bá ọ sọ̀rọ̀...</p>
-            </div>
-
-            <div class="history-card">
-              <div class="history-card-header">
-                <span class="history-card-title">Ìtàn Ilé-Ifẹ̀ àti Odùduwà</span>
-                <span class="history-card-date">Àná</span>
-              </div>
-              <p class="history-card-preview">Kí ni ìtàn Ilé-Ifẹ̀? — Ilé-Ifẹ̀ ni orísun àti ìbẹ̀rẹ̀ gbogbo ọmọ Yorùbá...</p>
-            </div>
-
-            <div class="history-card">
-              <div class="history-card-header">
-                <span class="history-card-title">Òwe Yorùbá àti Ìtumọ̀</span>
-                <span class="history-card-date">Ọjọ́ kẹta sẹ́yìn</span>
-              </div>
-              <p class="history-card-preview">Ọmọdé kò mọ egbò, ó ń pè é ní eṣinṣin...</p>
+            <div class="empty-history-box">
+              <p>Kò tí ì sí àkọsílẹ̀ kankan síbẹ̀.</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- ================================================================== -->
-      <!-- TAB 4: SETTINGS VIEW -->
+      <!-- TAB 3: SETTINGS VIEW -->
       <!-- ================================================================== -->
       <section class="tab-view" id="tabSettings">
         <div class="settings-container">
@@ -348,21 +335,13 @@
         </div>
       </section>
 
-      <!-- MOBILE BOTTOM DOCK (Visible on phone screens) -->
+      <!-- MOBILE BOTTOM DOCK (Strictly visible only on phone screens <=820px) -->
       <nav class="mobile-dock">
         <button class="dock-item active" data-tab="chat">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
           <span>Chat</span>
-        </button>
-        <button class="dock-item" data-tab="voice">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-            <line x1="12" y1="19" x2="12" y2="22"/>
-          </svg>
-          <span>Voice</span>
         </button>
         <button class="dock-item" data-tab="history">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">

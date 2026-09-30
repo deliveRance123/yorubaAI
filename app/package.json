@@ -1,0 +1,12 @@
+{
+  "name": "aroye-ui",
+  "version": "1.0.0",
+  "description": "ÀRÒYÉ Yoruba AI - TypeScript Frontend Architecture",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}
