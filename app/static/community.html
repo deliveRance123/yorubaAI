@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="yo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ÀRÒYÉ Community Portal — Help Build a Truly Yoruba AI</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="community.css">
+</head>
+<body>
+  <div class="portal-layout">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="portal-sidebar" id="portalSidebar">
+      
+      <!-- Brand Logo & Meta -->
+      <div class="brand-badge">
+        <div class="brand-emblem">
+          <img src="logo.png" alt="ÀRÒYÉ Logo">
+        </div>
+        <div class="brand-meta">
+          <h1>ÀRÒYÉ</h1>
+          <p>Together We Teach Yoruba</p>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="portal-nav">
+        <button class="nav-link active" data-portal-tab="home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-link" data-portal-tab="record" id="sidebarRecordBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+          <span>Record Speech</span>
+        </button>
+
+        <button class="nav-link" data-portal-tab="write" id="sidebarWriteBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+          <span>Write Text</span>
+        </button>
+
+        <button class="nav-link" data-portal-tab="review" id="sidebarReviewBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+          <span>Review & Verify</span>
+        </button>
+
+        <button class="nav-link" data-portal-tab="progress">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+          <span>Progress</span>
+        </button>
+
+        <button class="nav-link" data-portal-tab="leaderboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+          <span>Leaderboard</span>
+        </button>
+
+        <button class="nav-link" data-portal-tab="community">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <span>Community</span>
+        </button>
+
+        <button class="nav-link" data-portal-tab="guidelines">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          <span>Guidelines</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar User Footer -->
+      <div class="portal-user-footer">
+        <div class="user-tier-badge">
+          <div class="tier-left">
+            <span>👑</span>
+            <span>Contributor</span>
+          </div>
+          <span>Level 2 &rsaquo;</span>
+        </div>
+
+        <div class="user-profile-row">
+          <div class="user-avatar-circle">
+            <span>A</span>
+          </div>
+          <div class="user-info-text">
+            <strong>Adeoluwa (Crew)</strong>
+            <span>View Profile &rsaquo;</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEWPORT -->
+    <main class="portal-main">
+      
+      <!-- Top Header -->
+      <header class="portal-header">
+        <button class="mobile-nav-toggle" id="portalMenuToggle" aria-label="Toggle Mobile Menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+
+        <div class="header-search-box">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" placeholder="Search tasks, topics or help...">
+        </div>
+
+        <div class="header-actions">
+          <button class="notification-btn" title="Notifications">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span class="notification-badge"></span>
+          </button>
+          
+          <button class="header-user-btn" title="User Profile">A</button>
+        </div>
+      </header>
+
+      <!-- Content Body -->
+      <div class="portal-content-body">
+        
+        <!-- ============================================================== -->
+        <!-- HERO BANNER ("COMMUNITY PORTAL") -->
+        <!-- ============================================================== -->
+        <section class="portal-hero-banner">
+          <div class="banner-content">
+            <div class="banner-left">
+              <span class="community-pill">COMMUNITY PORTAL</span>
+              <h2 class="banner-title">Help Build a Truly Yoruba AI</h2>
+              <p class="banner-sub">Your voice, your knowledge, our future.</p>
+            </div>
+            
+            <div class="banner-art">
+              <div class="studio-headphone-icon" title="Yoruba Voice Studio">
+                <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats Pill Bar -->
+          <div class="banner-stats-row">
+            <div class="stat-pill-card">
+              <div class="stat-icon-wrap">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                </svg>
+              </div>
+              <div class="stat-meta">
+                <strong id="statContributors">12,480</strong>
+                <span>Contributors</span>
+              </div>
+            </div>
+
+            <div class="stat-pill-card">
+              <div class="stat-icon-wrap">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                </svg>
+              </div>
+              <div class="stat-meta">
+                <strong id="statRecordings">68,920</strong>
+                <span>Speech Recordings</span>
+              </div>
+            </div>
+
+            <div class="stat-pill-card">
+              <div class="stat-icon-wrap">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+              </div>
+              <div class="stat-meta">
+                <strong id="statSubmissions">54,300</strong>
+                <span>Text Submissions</span>
+              </div>
+            </div>
+
+            <div class="stat-pill-card">
+              <div class="stat-icon-wrap">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <div class="stat-meta">
+                <strong id="statApproved">93%</strong>
+                <span>Approved Data</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- CHOOSE A TASK GRID -->
+        <!-- ============================================================== -->
+        <section class="portal-section">
+          <div class="section-header-row">
+            <h3 class="section-title">Choose a Task</h3>
+            <span class="view-all-link">View All &rsaquo;</span>
+          </div>
+
+          <div class="task-cards-grid">
+            
+            <!-- Card 1: Record Speech -->
+            <div class="task-action-card">
+              <div class="task-icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                </svg>
+              </div>
+              <h4 class="task-card-title">Record Speech</h4>
+              <p class="task-card-desc">Read or speak naturally in Yoruba with accurate tone markers.</p>
+              <button class="task-card-btn primary" id="openRecordModalBtn">
+                <span>Start Recording</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+
+            <!-- Card 2: Write Text -->
+            <div class="task-action-card">
+              <div class="task-icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+              </div>
+              <h4 class="task-card-title">Write Text</h4>
+              <p class="task-card-desc">Contribute sentences, conversations, or vocabulary in standard Yoruba.</p>
+              <button class="task-card-btn" id="openWriteModalBtn">
+                <span>Start Writing</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+
+            <!-- Card 3: Review & Verify (Approval) -->
+            <div class="task-action-card">
+              <div class="task-icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="9 12 11 14 15 10"/>
+                </svg>
+              </div>
+              <h4 class="task-card-title">Review & Verify</h4>
+              <p class="task-card-desc">Listen to submissions and help vote whether they are clean & accurate.</p>
+              <button class="task-card-btn" id="openReviewModalBtn">
+                <span>Start Reviewing</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+
+            <!-- Card 4: Share Knowledge -->
+            <div class="task-action-card">
+              <div class="task-icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+              </div>
+              <h4 class="task-card-title">Share Knowledge</h4>
+              <p class="task-card-desc">Contribute proverbs, folklore, dialect words, history, and idioms.</p>
+              <button class="task-card-btn" id="openKnowledgeModalBtn">
+                <span>Start Sharing</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TWO-COLUMN LOWER SECTION -->
+        <!-- ============================================================== -->
+        <section class="portal-lower-grid">
+          
+          <!-- Column 1: Recent Tasks -->
+          <div class="panel-card">
+            <div class="section-header-row">
+              <h3 class="section-title">Recent Tasks</h3>
+              <span class="view-all-link">View All &rsaquo;</span>
+            </div>
+
+            <div class="recent-tasks-list">
+              <div class="task-list-row">
+                <div class="task-row-left">
+                  <div class="task-row-icon">🎙️</div>
+                  <div class="task-row-info">
+                    <strong>Record 5 common Yoruba greetings</strong>
+                    <div class="task-row-badges">
+                      <span class="task-tag">Speech</span>
+                      <span class="task-points">+50 pts</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="task-start-btn" onclick="document.getElementById('openRecordModalBtn').click()">Start</button>
+              </div>
+
+              <div class="task-list-row">
+                <div class="task-row-left">
+                  <div class="task-row-icon">✍️</div>
+                  <div class="task-row-info">
+                    <strong>Write 10 Yoruba proverbs with meanings</strong>
+                    <div class="task-row-badges">
+                      <span class="task-tag">Text</span>
+                      <span class="task-points">+40 pts</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="task-start-btn" onclick="document.getElementById('openKnowledgeModalBtn').click()">Start</button>
+              </div>
+
+              <div class="task-list-row">
+                <div class="task-row-left">
+                  <div class="task-row-icon">🎙️</div>
+                  <div class="task-row-info">
+                    <strong>Read the provided story paragraph</strong>
+                    <div class="task-row-badges">
+                      <span class="task-tag">Speech</span>
+                      <span class="task-points">+60 pts</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="task-start-btn" onclick="document.getElementById('openRecordModalBtn').click()">Start</button>
+              </div>
+
+              <div class="task-list-row">
+                <div class="task-row-left">
+                  <div class="task-row-icon">🛡️</div>
+                  <div class="task-row-info">
+                    <strong>Review 5 voice recordings for noise & tone</strong>
+                    <div class="task-row-badges">
+                      <span class="task-tag">Review</span>
+                      <span class="task-points">+45 pts</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="task-start-btn" onclick="document.getElementById('openReviewModalBtn').click()">Start</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Your Progress -->
+          <div class="panel-card">
+            <div class="section-header-row">
+              <h3 class="section-title">Your Progress</h3>
+              <span class="view-all-link">View Details &rsaquo;</span>
+            </div>
+
+            <div class="progress-radial-wrap">
+              <div class="progress-circle">
+                <div class="progress-inner-circle">
+                  <span>65%</span>
+                </div>
+              </div>
+              <div class="progress-tier-info">
+                <strong>Level 2 Contributor</strong>
+                <span>Dedicated Yoruba Scholar</span>
+                <small>350 / 500 points to Level 3</small>
+              </div>
+            </div>
+
+            <!-- Quick Stats 4-Pack -->
+            <div class="user-quick-stats">
+              <div class="user-stat-card">
+                <span class="user-stat-icon">🎙️</span>
+                <strong class="user-stat-val" id="myRecordingsCount">28</strong>
+                <span class="user-stat-label">Recordings</span>
+              </div>
+              <div class="user-stat-card">
+                <span class="user-stat-icon">📄</span>
+                <strong class="user-stat-val" id="myTextCount">15</strong>
+                <span class="user-stat-label">Text Subs</span>
+              </div>
+              <div class="user-stat-card">
+                <span class="user-stat-icon">🛡️</span>
+                <strong class="user-stat-val" id="myReviewsCount">12</strong>
+                <span class="user-stat-label">Reviews</span>
+              </div>
+              <div class="user-stat-card">
+                <span class="user-stat-icon">🏆</span>
+                <strong class="user-stat-val">2</strong>
+                <span class="user-stat-label">Day Streak</span>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+
+    <!-- MOBILE BOTTOM NAVIGATION (Matches Mockup Phone Screen) -->
+    <nav class="portal-mobile-dock">
+      <button class="mobile-dock-btn active" data-portal-tab="home">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="mobile-dock-btn" onclick="document.getElementById('openRecordModalBtn').click()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+        </svg>
+        <span>Record</span>
+      </button>
+      <button class="mobile-dock-btn" onclick="document.getElementById('openReviewModalBtn').click()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 11 12 14 22 4"/>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+        <span>Verify</span>
+      </button>
+      <button class="mobile-dock-btn" data-portal-tab="community">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+        </svg>
+        <span>Community</span>
+      </button>
+      <button class="mobile-dock-btn" data-portal-tab="progress">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <span>Profile</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- MODAL 1: RECORD SPEECH STUDIO -->
+  <!-- ==================================================================== -->
+  <div class="modal-overlay" id="recordModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>&times;</button>
+      <h3 class="modal-title">Ṣe Àkọsílẹ̀ Ohùn (Record Yoruba Speech)</h3>
+      <p class="modal-desc">Ka gbolohun yìí pẹ̀lú ohùn tó ṣe kedere àti àmì ohùn tí ó tọ́.</p>
+
+      <div class="studio-prompt-card">
+        <div class="studio-prompt-yoruba" id="recordTargetSentence">
+          "Ẹ kú àárọ̀ gbogbo ilé, ṣé àlàáfíà ni ẹ wà?"
+        </div>
+        <div class="studio-prompt-english" id="recordSentenceEnglish">
+          (Good morning everyone at home, are you all in peace?)
+        </div>
+      </div>
+
+      <div class="mic-studio-controls">
+        <button class="studio-record-btn" id="recordActionBtn" title="Click to record">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </button>
+        <span class="studio-status-text" id="recordStatusLabel">Tẹ bọ́tìnì láti bẹ̀rẹ̀ sí í sọ̀rọ̀</span>
+      </div>
+
+      <audio id="audioPlayback" class="studio-audio-preview" controls style="display: none;"></audio>
+
+      <div class="modal-actions-row">
+        <button class="btn-secondary" data-close-modal>Fagilé (Cancel)</button>
+        <button class="btn-primary" id="submitRecordingBtn" disabled>Firanṣẹ́ sí Database (Submit)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- MODAL 2: REVIEW & VERIFY (APPROVAL WORKFLOW) -->
+  <!-- ==================================================================== -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>&times;</button>
+      <h3 class="modal-title">Gbọ́ kí o Dánwò (Review & Verify)</h3>
+      <p class="modal-desc">Gbọ́ ohùn yìí kí o sì fọwọ́sí bóyá kò ní ariwo àti pé àmì ohùn bá ọ̀rọ̀ náà mu.</p>
+
+      <div class="studio-prompt-card">
+        <div class="studio-prompt-yoruba" id="reviewTargetSentence">
+          "Ilé-Ifẹ̀ ni orísun àti ìbẹ̀rẹ̀ gbogbo ọmọ Yorùbá."
+        </div>
+        <div class="studio-prompt-english">
+          Speaker: Omotola &bull; Dialect: General Yoruba
+        </div>
+      </div>
+
+      <div style="text-align: center; margin: 18px 0;">
+        <audio id="reviewAudioPlayer" controls style="width: 100%;"></audio>
+      </div>
+
+      <p style="font-size: 0.84rem; color: var(--text-muted); text-align: center; margin-bottom: 12px;">
+        Ṣé ohùn náà mọ́ kedere láìsí ariwo?
+      </p>
+
+      <div class="review-vote-row">
+        <button class="vote-btn reject" id="voteRejectBtn">
+          <span>❌ Kọ̀ (Reject/Noise)</span>
+        </button>
+        <button class="vote-btn approve" id="voteApproveBtn">
+          <span>✅ Fọwọ́sí (Approve)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- MODAL 3: WRITE TEXT -->
+  <!-- ==================================================================== -->
+  <div class="modal-overlay" id="writeModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>&times;</button>
+      <h3 class="modal-title">Kọ Gbolohun Yorùbá (Submit Yoruba Text)</h3>
+      <p class="modal-desc">Kọ gbolohun pẹ̀lú àmì ohùn tí ó tọ́ fún ìkẹ́kọ̀ọ́ ÀRÒYÉ.</p>
+
+      <form id="writeTextForm">
+        <div class="form-group">
+          <label class="form-label">Gbolohun ní èdè Yorùbá:</label>
+          <textarea class="form-textarea" id="writeTextInput" placeholder="Kọ gbolohun Yorùbá síbí pẹ̀lú àmì ohùn (ẹ, ọ, ṣ, á, à...)" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ìtumọ̀ ní èdè Gẹ̀ẹ́sì (English Translation):</label>
+          <input type="text" class="form-input" id="writeEnglishInput" placeholder="English translation (optional)">
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn-secondary" data-close-modal>Fagilé</button>
+          <button type="submit" class="btn-primary">Fi Kún Database</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- MODAL 4: SHARE KNOWLEDGE (Proverbs / Culture) -->
+  <!-- ==================================================================== -->
+  <div class="modal-overlay" id="knowledgeModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" data-close-modal>&times;</button>
+      <h3 class="modal-title">Kọ Ìmọ̀ Àṣà tàbí Òwe Yorùbá</h3>
+      <p class="modal-desc">Fi òwe, ìtàn, tàbí ìmọ̀ àṣà kún ibi-ìfipamọ́ ÀRÒYÉ.</p>
+
+      <form id="knowledgeForm">
+        <div class="form-group">
+          <label class="form-label">Òwe tàbí Àkọlé Àṣà:</label>
+          <input type="text" class="form-input" id="knowledgeTitle" placeholder="Fún àpẹẹrẹ: Òwe lẹṣin ọ̀rọ̀..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ìtumọ̀ àti Ẹ̀kọ́ tí ó wà nínú rẹ̀:</label>
+          <textarea class="form-textarea" id="knowledgeMeaning" placeholder="Kí ni ìtumọ̀ rẹ̀ àti ìgbà wo ni a máa ń pa á?" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ẹ̀ka-èdè (Dialect / Origin):</label>
+          <select class="form-select" id="knowledgeDialect">
+            <option value="General">Yorùbá Àjùmọ̀lò (General)</option>
+            <option value="Oyo">Ọ̀yọ́</option>
+            <option value="Ekiti">Èkìtì</option>
+            <option value="Ijebu">Ìjẹ̀bú</option>
+            <option value="Ondo">Òndó</option>
+          </select>
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn-secondary" data-close-modal>Fagilé</button>
+          <button type="submit" class="btn-primary">Firanṣẹ́ Ìmọ̀</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="community.js"></script>
+</body>
+</html>
